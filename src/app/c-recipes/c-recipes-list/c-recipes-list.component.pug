@@ -1,0 +1,6 @@
+.list-group
+  .card.list-group-item.mb-4("*ngFor"="let recipe of recipes")
+    img.card-img-top("[src]"="recipe.image", alt="{{ recipe.name }}")
+    .card-body
+      h5.card-title {{ recipe.name }}
+      p.card-text {{ recipe.description }}

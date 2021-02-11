@@ -1,0 +1,7 @@
+c-shopping-list-editor
+
+hr
+
+.list-group
+  a.list-group-item("*ngFor"="let ingredient of ingredients")
+    | {{ ingredient.name }} ({{ ingredient.amount }})

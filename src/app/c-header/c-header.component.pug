@@ -1,0 +1,20 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  a.navbar-brand(href='#')
+    | Recipe Book
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item
+        a.nav-link(href='#')
+          | Recipes
+      li.nav-item
+        a.nav-link(href='#')
+          | Shopping List
+      li.nav-item.dropdown
+        a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+          | Data
+        .dropdown-menu(aria-labelledby='navbarDropdown')
+          a.dropdown-item(href='#') Save
+          .dropdown-divider
+          a.dropdown-item(href='#') Fetch

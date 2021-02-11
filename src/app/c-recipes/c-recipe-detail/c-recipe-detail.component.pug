@@ -1,0 +1,14 @@
+.card
+  img.card-img-top("[src]"="recipe.image", alt="{{ recipe.name }}")
+  .card-body
+    h5.card-title {{ recipe.name }}
+    p.card-text {{ recipe.description }}
+    .dropdown.float-right
+      button.btn.btn-secondary.dropdown-toggle#cardDropdown(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+        | Manage
+      .dropdown-menu(aria-labelledby='cardDropdown')
+        a.dropdown-item(href='#') To shopping list
+        .dropdown-divider
+        a.dropdown-item(href='#') Edit recipe
+        a.dropdown-item(href='#') Delete recipe
+  | INGREDIENTS
