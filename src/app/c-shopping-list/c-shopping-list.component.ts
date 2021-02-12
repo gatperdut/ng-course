@@ -22,4 +22,8 @@ export class CShoppingListComponent implements OnInit {
 
   }
 
+  onIngredientAdded(ingredient: Ingredient) {
+    this.ingredients.push(ingredient);
+  }
+
 }
