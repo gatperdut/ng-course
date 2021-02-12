@@ -1,10 +1,8 @@
 .container
   .row
     .col-md-12
-      c-header
+      c-header("(stateChanged)"="onStateChanged($event)", "[state]"="state.current")
   .row
     .col-md-12
-      c-recipes
-  .row
-    .col-md-12
-      c-shopping-list
+      c-recipes("*ngIf"="state.is.recipes()")
+      c-shopping-list("*ngIf"="state.is.shoppingList()")

@@ -6,10 +6,10 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
   #navbarSupportedContent.collapse.navbar-collapse
     ul.navbar-nav.mr-auto
       li.nav-item
-        a.nav-link(href='#')
+        a.nav-link(href='#', "(click)"="onStateChanged('recipes')", "[ngClass]"="{ active: state === 'recipes' }")
           | Recipes
       li.nav-item
-        a.nav-link(href='#')
+        a.nav-link(href='#', "(click)"="onStateChanged('shopping-list')", "[ngClass]"="{ active: state === 'shopping-list' }")
           | Shopping List
       li.nav-item.dropdown
         a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
