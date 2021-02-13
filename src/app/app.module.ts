@@ -10,6 +10,7 @@ import { CRecipesListComponent } from './c-recipes/c-recipes-list/c-recipes-list
 import { CShoppingListComponent } from './c-shopping-list/c-shopping-list.component';
 import { CShoppingListEditorComponent } from './c-shopping-list/c-shopping-list-editor/c-shopping-list-editor.component';
 import { CRecipesComponent } from './c-recipes/c-recipes.component';
+import { CDropdownDirective } from './shared/dropdown.directive'
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     CRecipeDetailComponent,
     CShoppingListComponent,
     CShoppingListEditorComponent,
-    CRecipesComponent
+    CRecipesComponent,
+    CDropdownDirective
   ],
   imports: [
     BrowserModule,
