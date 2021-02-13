@@ -1,4 +1,4 @@
-// UNUSED - only for reference.
+// UNUSED - reference
 
 import { Directive, HostListener, HostBinding } from '@angular/core';
 
