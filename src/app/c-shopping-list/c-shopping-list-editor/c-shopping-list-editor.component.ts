@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Ingredient } from 'src/app/shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'c-shopping-list-editor',
@@ -12,9 +13,7 @@ export class CShoppingListEditorComponent implements OnInit, AfterViewInit {
 
   @ViewChild('amountInput') amountInput!: ElementRef;
 
-  @Output() ingredientAdded = new EventEmitter<Ingredient>();
-
-  constructor() {
+  constructor(public shoppingListService: ShoppingListService) {
 
   }
 
@@ -32,7 +31,9 @@ export class CShoppingListEditorComponent implements OnInit, AfterViewInit {
 
     const ingredient = new Ingredient(name, amount);
 
-    this.ingredientAdded.emit(ingredient);
+    this.shoppingListService.addIngredient(ingredient);
+
+    this.onClear();
   }
 
   onDelete() {

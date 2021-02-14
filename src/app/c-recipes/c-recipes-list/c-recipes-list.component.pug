@@ -1,3 +1,3 @@
 .list-group
-  .list-group-item.mb-4("*ngFor"="let recipe of recipes")
-    c-recipe-item("(recipeSelected)"="onRecipeSelected(recipe)", "[recipe]"="recipe")
+  .list-group-item.mb-4("*ngFor"="let recipe of recipesService.recipes.list")
+    c-recipe-item("[recipe]"="recipe")

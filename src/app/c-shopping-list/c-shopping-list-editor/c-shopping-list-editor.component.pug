@@ -3,9 +3,11 @@ form
     .form-group.col-md-9
       label(for="name") Name
       input.form-control.form-control-sm(type="text", id="name", "#nameInput"="")
+
     .form-group.col-md-3
       label(for="amount") Amount
       input.form-control.form-control-sm(type="number", id="amount", "#amountInput"="")
+
   button.btn.btn-success("(click)"="onAdd()" type="submit") Add
   button.btn.btn-danger("(click)"="onDelete()" type="button") Delete
   button.btn.btn-secondary("(click)"="onClear()", type="button") Clear

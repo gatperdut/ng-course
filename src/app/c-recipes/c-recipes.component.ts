@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from './recipes.model';
+import { RecipesService } from './recipes.service';
 
 @Component({
   selector: 'c-recipes',
@@ -8,13 +8,7 @@ import { Recipe } from './recipes.model';
 })
 export class CRecipesComponent implements OnInit {
 
-  recipe!: Recipe;
-
-  onRecipeSelected = (recipe: Recipe) => {
-    this.recipe = recipe;
-  }
-
-  constructor() {
+  constructor(public recipesService: RecipesService) {
 
   }
 

@@ -7,7 +7,7 @@ hr
 
 .row
   .col-md-5
-    c-recipes-list("(recipeSelected)"="onRecipeSelected($event)")
+    c-recipes-list
   .col-md-7
-    c-recipe-detail("[recipe]"="recipe", "*ngIf"="recipe; else noRecipeInfo")
+    c-recipe-detail("*ngIf"="recipesService.recipes.current; else noRecipeInfo")
     ng-template("#noRecipeInfo"="") Please select a recipe.

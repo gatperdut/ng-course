@@ -1,7 +1,5 @@
-c-shopping-list-editor("(ingredientAdded)"="onIngredientAdded($event)")
-
+c-shopping-list-editor
 hr
-
 .list-group
-  a.list-group-item("*ngFor"="let ingredient of ingredients")
+  a.list-group-item("*ngFor"="let ingredient of shoppingListService.ingredients")
     | {{ ingredient.name }} ({{ ingredient.amount }})
