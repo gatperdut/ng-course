@@ -9,8 +9,8 @@
       .dropdown-menu(aria-labelledby='cardDropdown')
         a.dropdown-item((click)="shoppingListService.addIngredientsFromCurrent()") To shopping list
         .dropdown-divider
-        a.dropdown-item(href='#') Edit recipesService.recipes.current
-        a.dropdown-item(href='#') Delete recipesService.recipes.current
+        a.dropdown-item Edit recipesService.recipes.current
+        a.dropdown-item Delete recipesService.recipes.current
   .list-group
     .list-group-item("*ngFor"="let ingredient of recipesService.recipes.current.ingredients")
       | {{ ingredient.name }} ({{ ingredient.amount }})

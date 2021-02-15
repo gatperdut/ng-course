@@ -1,8 +1,7 @@
 .container
   .row
     .col-md-12
-      c-header("(stateChanged)"="onStateChanged($event)", "[state]"="state.current")
+      c-header
   .row
     .col-md-12
-      c-recipes("*ngIf"="state.is.recipes()")
-      c-shopping-list("*ngIf"="state.is.shoppingList()")
+      router-outlet

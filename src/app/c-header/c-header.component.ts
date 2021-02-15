@@ -1,5 +1,4 @@
-import { Input } from "@angular/core";
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
   selector: 'c-header',
@@ -7,8 +6,6 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
   styleUrls: ['./c-header.component.scss']
 })
 export class CHeaderComponent implements OnInit {
-  @Input() state:string = 'recipes';
-  @Output() stateChanged = new EventEmitter<string>();
 
   constructor() {
 
@@ -18,7 +15,4 @@ export class CHeaderComponent implements OnInit {
 
   }
 
-  onStateChanged(state:string) {
-    this.stateChanged.emit(state);
-  }
 }
