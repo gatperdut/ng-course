@@ -17,15 +17,15 @@ export class CShoppingListEditorComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.onClear();
   }
 
-  onAdd() {
+  onAdd(): void {
     const name = this.nameInput.nativeElement.value;
     const amount = this.amountInput.nativeElement.value;
 
@@ -36,11 +36,11 @@ export class CShoppingListEditorComponent implements OnInit, AfterViewInit {
     this.onClear();
   }
 
-  onDelete() {
+  onDelete(): void {
 
   }
 
-  onClear() {
+  onClear(): void {
     this.nameInput.nativeElement.value = '';
     this.amountInput.nativeElement.value = 1;
   }

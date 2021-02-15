@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'c-header',
@@ -7,12 +8,16 @@ import { Component, OnInit } from "@angular/core";
 })
 export class CHeaderComponent implements OnInit {
 
-  constructor() {
+  constructor(private router: Router) {
 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
+  }
+
+  onNewRecipe(): void {
+    this.router.navigate(['/recipes', 'new']);
   }
 
 }

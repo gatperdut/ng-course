@@ -8,7 +8,7 @@ import { Directive, HostListener, HostBinding } from '@angular/core';
 export class CDropdownDirective {
   @HostBinding('class.open') open = false;
 
-  @HostListener('click') toggle() {
+  @HostListener('click') toggle(): void {
     this.open = !this.open;
   }
 }

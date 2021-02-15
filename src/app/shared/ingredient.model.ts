@@ -11,7 +11,7 @@ export class Ingredient {
     this.amount += amount;
   }
 
-  clone() {
+  clone(): Ingredient {
     return new Ingredient(this.name, this.amount);
   }
 }

@@ -12,7 +12,7 @@ export class CShoppingListComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
   }
 

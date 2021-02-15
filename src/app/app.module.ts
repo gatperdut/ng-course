@@ -13,6 +13,8 @@ import { CRecipesComponent } from './c-recipes/c-recipes.component';
 import { CDropdownDirective } from './reference/dropdown.directive'
 import { FormsModule } from '@angular/forms';
 import { CHighlightDirective } from './reference/c-highlight.directive';
+import { CRecipeStartComponent } from './c-recipes/c-recipe-start/c-recipe-start.component';
+import { CRecipeEditComponent } from './c-recipes/c-recipe-edit/c-recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { CHighlightDirective } from './reference/c-highlight.directive';
     CShoppingListEditorComponent,
     CRecipesComponent,
     CDropdownDirective,
-    CHighlightDirective
+    CHighlightDirective,
+    CRecipeStartComponent,
+    CRecipeEditComponent
   ],
   imports: [
     BrowserModule,

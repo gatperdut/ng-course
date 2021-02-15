@@ -11,11 +11,11 @@ export class ShoppingListService implements OnInit {
     new Ingredient('Tomatoes', 10)
   ];
 
-  constructor(private recipesService: RecipesService) {
+  constructor() {
 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
   }
 
@@ -32,14 +32,6 @@ export class ShoppingListService implements OnInit {
 
   addIngredients(ingredients: Ingredient[]) {
     _.each(ingredients, ingredient => this.addIngredient(ingredient));
-  }
-
-  addIngredientsFromCurrent() {
-    let ingredients = _.map(
-      this.recipesService.recipes.current.ingredients,
-      (ingredient) => ingredient.clone()
-    );
-    this.addIngredients(ingredients);
   }
 
 }

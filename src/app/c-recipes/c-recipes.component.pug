@@ -1,13 +1,7 @@
-.row
-  .col-md-12
-    button.btn.btn-success.float-right
-      | New Recipe
-
 hr
 
 .row
   .col-md-5
     c-recipes-list
   .col-md-7
-    c-recipe-detail("*ngIf"="recipesService.recipes.current; else noRecipeInfo")
-    ng-template("#noRecipeInfo"="") Please select a recipe.
+    router-outlet

@@ -1,3 +1,7 @@
-:host {
+.card {
   cursor: pointer;
+
+  &.active {
+    background-color: #999999;
+  }
 }

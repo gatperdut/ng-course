@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Recipe } from "../recipe.model";
 
 import { RecipesService } from "../recipes.service";
 
@@ -9,12 +10,14 @@ import { RecipesService } from "../recipes.service";
 })
 export class CRecipesListComponent implements OnInit {
 
-  constructor(public recipesService: RecipesService) {
+  recipes: Recipe[] = [];
+
+  constructor(private recipesService: RecipesService) {
 
   }
 
-  ngOnInit() {
-
+  ngOnInit(): void {
+    this.recipes = this.recipesService.getRecipes();
   }
 
 }

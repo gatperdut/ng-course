@@ -10,7 +10,7 @@ export class CHighlightDirective implements OnInit {
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.backgroundColor = this.defaultColor;
   }
 

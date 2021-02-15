@@ -1,17 +1,17 @@
 .card
-  img.card-img-top("[src]"="recipesService.recipes.current.image", alt="{{ recipesService.recipes.current.name }}")
+  img.card-img-top("[src]"="recipe.image", alt="{{ recipe.name }}")
   .card-body
-    h5.card-title {{ recipesService.recipes.current.name }}
-    p.card-text {{ recipesService.recipes.current.description }}
+    h5.card-title {{ recipe.name }}
+    p.card-text {{ recipe.description }}
     .dropdown.float-right
       button.btn.btn-secondary.dropdown-toggle#cardDropdown(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
         | Manage
       .dropdown-menu(aria-labelledby='cardDropdown')
-        a.dropdown-item((click)="shoppingListService.addIngredientsFromCurrent()") To shopping list
+        a.dropdown-item((click)="onAddToShoppingList()") To shopping list
         .dropdown-divider
-        a.dropdown-item Edit recipesService.recipes.current
-        a.dropdown-item Delete recipesService.recipes.current
+        a.dropdown-item("(click)"="onEditRecipe()") Edit recipe
+        a.dropdown-item Delete recipe
   .list-group
-    .list-group-item("*ngFor"="let ingredient of recipesService.recipes.current.ingredients")
+    .list-group-item("*ngFor"="let ingredient of recipe.ingredients")
       | {{ ingredient.name }} ({{ ingredient.amount }})
 

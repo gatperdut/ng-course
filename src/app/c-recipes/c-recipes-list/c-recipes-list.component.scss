@@ -1,0 +1,7 @@
+.list-group-item {
+  border: none;
+
+  &:first-of-type {
+    padding-top: 0;
+  }
+}

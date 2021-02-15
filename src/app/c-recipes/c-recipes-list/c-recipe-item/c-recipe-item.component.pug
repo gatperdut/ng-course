@@ -1,4 +1,4 @@
-.card("(click)"="onRecipeSelected()")
+a.card("[routerLink]"="[index]", routerLinkActive="active")
   img.card-img-top("[src]"="recipe.image", alt="{{ recipe.name }}")
   .card-body
     h5.card-title {{ recipe.name }}
