@@ -10,7 +10,7 @@ import { RecipesService } from "../recipes.service";
 })
 export class CRecipesListComponent implements OnInit {
 
-  recipes: Recipe[] = [];
+  public recipes: Recipe[] = [];
 
   constructor(private recipesService: RecipesService) {
 

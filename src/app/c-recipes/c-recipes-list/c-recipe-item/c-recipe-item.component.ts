@@ -7,9 +7,9 @@ import { Recipe } from '../../recipe.model';
   styleUrls: ['./c-recipe-item.component.scss']
 })
 export class CRecipeItemComponent implements OnInit {
-  @Input() recipe!: Recipe;
+  @Input() public recipe!: Recipe;
 
-  @Input() index!: number;
+  @Input() public index!: number;
 
   constructor() {
 

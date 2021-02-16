@@ -16,7 +16,7 @@ export class CHeaderComponent implements OnInit {
 
   }
 
-  onNewRecipe(): void {
+  public onNewRecipe(): void {
     this.router.navigate(['/recipes', 'new']);
   }
 

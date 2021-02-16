@@ -1,5 +1,5 @@
 export class Ingredient {
-  public readonly name: string;
+  public name: string;
   public amount: number;
 
   constructor(name: string, amount: number) {
@@ -7,11 +7,15 @@ export class Ingredient {
     this.amount = amount;
   }
 
-  addAmount(amount: number) {
+  public addAmount(amount: number):void {
     this.amount += amount;
   }
 
-  clone(): Ingredient {
+  public clone(): Ingredient {
     return new Ingredient(this.name, this.amount);
+  }
+
+  public valid(): boolean {
+    return !!this.name && !!this.amount;
   }
 }

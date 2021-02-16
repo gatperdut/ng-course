@@ -8,13 +8,17 @@ export class Recipe {
 
   public readonly image: string;
 
-  public ingredients: Ingredient[];
+  private ingredients: Ingredient[];
 
   constructor(name: string, description: string, image: string, ingredients: Ingredient[]) {
     this.name        = name;
     this.description = description;
     this.image       = image;
     this.ingredients = ingredients;
+  }
+
+  public getIngredients(): Ingredient[] {
+    return this.ingredients.slice();
   }
 
 }

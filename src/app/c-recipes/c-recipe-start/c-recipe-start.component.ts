@@ -10,6 +10,7 @@ export class CRecipeStartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

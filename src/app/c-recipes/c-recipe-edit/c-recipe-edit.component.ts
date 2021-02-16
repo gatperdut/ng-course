@@ -10,11 +10,11 @@ import * as _ from 'underscore';
 })
 export class CRecipeEditComponent implements OnInit, OnDestroy {
 
-  index!: number;
+  private index!: number;
 
-  editMode: boolean = false;
+  private editMode: boolean = false;
 
-  paramsSubscription!: Subscription;
+  private paramsSubscription!: Subscription;
 
   constructor(private activatedRoute: ActivatedRoute) { }
 

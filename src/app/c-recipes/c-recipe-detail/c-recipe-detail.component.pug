@@ -12,6 +12,6 @@
         a.dropdown-item("(click)"="onEditRecipe()") Edit recipe
         a.dropdown-item Delete recipe
   .list-group
-    .list-group-item("*ngFor"="let ingredient of recipe.ingredients")
+    .list-group-item("*ngFor"="let ingredient of recipe.getIngredients()")
       | {{ ingredient.name }} ({{ ingredient.amount }})
 

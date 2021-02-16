@@ -11,9 +11,9 @@ import { RecipesService } from '../recipes.service';
 })
 export class CRecipeDetailComponent implements OnInit, OnDestroy {
 
-  recipe!: Recipe;
+  public recipe!: Recipe;
 
-  recipeSelected!: Subscription;
+  private recipeSelected!: Subscription;
 
   constructor(private recipesService: RecipesService, private activatedRoute: ActivatedRoute, private router: Router) {
 
@@ -32,11 +32,11 @@ export class CRecipeDetailComponent implements OnInit, OnDestroy {
     this.recipeSelected.unsubscribe();
   }
 
-  onAddToShoppingList(): void {
-    this.recipesService.addToShoppingList(this.recipe.ingredients);
+  public onAddToShoppingList(): void {
+    this.recipesService.addToShoppingList(this.recipe.getIngredients());
   }
 
-  onEditRecipe(): void {
+  public onEditRecipe(): void {
     this.router.navigate(['edit'], { relativeTo: this.activatedRoute });
   }
 

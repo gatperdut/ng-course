@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
 
@@ -9,11 +9,9 @@ import { ShoppingListService } from '../shopping-list.service';
 })
 export class CShoppingListEditorComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('nameInput') nameInput!: ElementRef;
+  ingredient = new Ingredient('', 1);
 
-  @ViewChild('amountInput') amountInput!: ElementRef;
-
-  constructor(public shoppingListService: ShoppingListService) {
+  constructor(private shoppingListService: ShoppingListService) {
 
   }
 
@@ -25,24 +23,23 @@ export class CShoppingListEditorComponent implements OnInit, AfterViewInit {
     this.onClear();
   }
 
-  onAdd(): void {
-    const name = this.nameInput.nativeElement.value;
-    const amount = this.amountInput.nativeElement.value;
+  public canAdd(): boolean {
+    return this.ingredient.valid();
+  }
 
-    const ingredient = new Ingredient(name, amount);
-
-    this.shoppingListService.addIngredient(ingredient);
+  public onAdd(): void {
+    this.shoppingListService.addIngredients([this.ingredient]);
 
     this.onClear();
   }
 
-  onDelete(): void {
+  public onDelete(): void {
 
   }
 
-  onClear(): void {
-    this.nameInput.nativeElement.value = '';
-    this.amountInput.nativeElement.value = 1;
+  public onClear(): void {
+    this.ingredient.name = '';
+    this.ingredient.amount = 1;
   }
 
 }
