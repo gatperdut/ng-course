@@ -1,4 +1,6 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
 
@@ -7,39 +9,63 @@ import { ShoppingListService } from '../shopping-list.service';
   templateUrl: './c-shopping-list-editor.component.html',
   styleUrls: ['./c-shopping-list-editor.component.scss']
 })
-export class CShoppingListEditorComponent implements OnInit, AfterViewInit {
+export class CShoppingListEditorComponent implements OnInit, OnDestroy {
 
-  ingredient = new Ingredient('', 1);
+  @ViewChild('ngForm') private ngForm!: NgForm;
+
+  ingredientSelected!: Subscription;
+
+  editingIndex: number = -1;
 
   constructor(private shoppingListService: ShoppingListService) {
 
   }
 
   ngOnInit(): void {
-
+    this.ingredientSelected = this.shoppingListService.ingredientSelected.subscribe(
+      (index: number) => {
+        this.editingIndex = index;
+        if (this.editingIndex >= 0) {
+            let ingredient: Ingredient = this.shoppingListService.getIngredient(this.editingIndex);
+            this.ngForm.setValue(
+              {
+                name:   ingredient.name,
+                amount: ingredient.amount
+              }
+            );
+        }
+        else {
+          this.onClear();
+        }
+      }
+    );
   }
 
-  ngAfterViewInit(): void {
+  public onSubmit(): void {
+    const value = this.ngForm.value;
+    const ingredient: Ingredient = new Ingredient(value.name, value.amount);
+
+    if (this.editingIndex >= 0) {
+      this.shoppingListService.updateIngredient(this.editingIndex, ingredient);
+    }
+    else {
+      this.shoppingListService.addIngredients([ingredient]);
+    }
+
+    this.shoppingListService.ingredientSelected.next(-1);
     this.onClear();
-  }
-
-  public canAdd(): boolean {
-    return this.ingredient.valid();
-  }
-
-  public onAdd(): void {
-    this.shoppingListService.addIngredients([this.ingredient]);
-
-    this.onClear();
-  }
-
-  public onDelete(): void {
-
   }
 
   public onClear(): void {
-    this.ingredient.name = '';
-    this.ingredient.amount = 1;
+    this.ngForm.reset();
+  }
+
+  public onCancel(): void {
+    this.shoppingListService.ingredientSelected.next(-1);
+  }
+
+  ngOnDestroy(): void {
+    this.ingredientSelected.unsubscribe();
   }
 
 }

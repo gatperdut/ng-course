@@ -1,5 +1,6 @@
 c-shopping-list-editor
 hr
 .list-group
-  a.list-group-item("*ngFor"="let ingredient of ingredients")
-    | {{ ingredient.name }} ({{ ingredient.amount }})
+  .list-group-item("*ngFor"="let ingredient of ingredients; let i = index;", "(click)"="onIngredientSelected(i)", [class]="{ selected: editingIndex === i }")
+    button.btn.btn-danger.btn-sm("(click)"="onIngredientDeleted(i)", [disabled]="editingIndex >= 0 && editingIndex !== i") X
+    | &nbsp; {{ ingredient.name }} ({{ ingredient.amount }})

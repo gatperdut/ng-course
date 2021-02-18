@@ -11,7 +11,7 @@ import { CShoppingListComponent } from './c-shopping-list/c-shopping-list.compon
 import { CShoppingListEditorComponent } from './c-shopping-list/c-shopping-list-editor/c-shopping-list-editor.component';
 import { CRecipesComponent } from './c-recipes/c-recipes.component';
 import { CDropdownDirective } from './reference/dropdown.directive'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CHighlightDirective } from './reference/c-highlight.directive';
 import { CRecipeStartComponent } from './c-recipes/c-recipe-start/c-recipe-start.component';
 import { CRecipeEditComponent } from './c-recipes/c-recipe-edit/c-recipe-edit.component';
@@ -34,7 +34,8 @@ import { CRecipeEditComponent } from './c-recipes/c-recipe-edit/c-recipe-edit.co
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

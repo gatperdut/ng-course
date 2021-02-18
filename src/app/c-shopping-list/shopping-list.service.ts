@@ -11,7 +11,9 @@ export class ShoppingListService implements OnInit {
     new Ingredient('Tomatoes', 10)
   ];
 
-  private ingredientsChanged = new Subject<Ingredient[]>();
+  private ingredientsChangedSubject: Subject<Ingredient[]> = new Subject<Ingredient[]>();
+
+  private ingredientSelectedSubject: Subject<number> = new Subject<number>();
 
   constructor() {
 
@@ -21,15 +23,23 @@ export class ShoppingListService implements OnInit {
 
   }
 
-  public ingredientsChangedSubject(): Subject<Ingredient[]> {
-    return this.ingredientsChanged;
+  public get ingredientsChanged(): Subject<Ingredient[]> {
+    return this.ingredientsChangedSubject;
+  }
+
+  public get ingredientSelected(): Subject<number> {
+    return this.ingredientSelectedSubject;
   }
 
   public getIngredients(): Ingredient[] {
     return this.ingredients.slice();
   }
 
-  private addIngredient(ingredient: Ingredient) {
+  public getIngredient(index: number): Ingredient {
+    return this.getIngredients()[index];
+  }
+
+  private addIngredient(ingredient: Ingredient): void {
     let previousIngredient = _.findWhere(this.ingredients, { name: ingredient.name });
 
     if (previousIngredient) {
@@ -40,10 +50,23 @@ export class ShoppingListService implements OnInit {
     }
   }
 
-  public addIngredients(ingredients: Ingredient[]) {
+  public addIngredients(ingredients: Ingredient[]): void {
     _.each(ingredients, ingredient => this.addIngredient(ingredient));
 
     this.ingredientsChanged.next(this.getIngredients());
+  }
+
+  public updateIngredient(index: number, ingredient: Ingredient): void {
+    this.ingredients[index] = ingredient;
+
+    this.ingredientsChanged.next(this.getIngredients());
+  }
+
+  public deleteIngredient(index: number): void {
+    this.ingredients.splice(index, 1);
+
+    this.ingredientsChanged.next(this.getIngredients());
+    this.ingredientSelected.next(-1);
   }
 
 }

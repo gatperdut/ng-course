@@ -1,1 +1,38 @@
-| recipe.edit.component
+form("[formGroup]"="formGroup", "(ngSubmit)"="onSubmit()")
+  .form-row
+    .form-group.col-sm-6
+      button.btn.btn-sm.btn-danger(type="button") Cancel
+    .form-group.col-sm-6
+      button.btn.btn-sm.btn-success.float-right(type="submit") Save
+  .form-group.row
+    label.col-sm-2.col-form-label(for="name") Name
+    .col-sm-10
+      input.form-control#name(type="text", formControlName="name")
+  .form-group.row
+    label.col-sm-2.col-form-label(for="image") Image
+    .col-sm-10
+      input.form-control#image(type="url", formControlName="image")
+  .form-group.row
+    .col-xs-12
+      img.img-responsive(src="")
+  .form-group.row
+    label.col-sm-2.col-form-label(for="description") Description
+    .col-sm-10
+      textarea.form-control#description(type="text", rows="6", formControlName="description")
+  hr
+  div(formArrayName="ingredients")
+    h3 Ingredients
+    .form-row(*ngFor="let ingredientControl of ingredientControls; let i = index", [formGroupName]="i")
+      .form-group.col-10
+        label Name
+        .input-group.input-group-sm
+          .input-group-prepend
+            button.btn.btn-outline-danger(type="button") X
+          input.form-control(type="text", formControlName="name")
+      .form-group.col-2
+        label Amount
+        input.form-control.form-control-sm(type="number", formControlName="amount")
+    .form-group.row
+      .col-sm-12
+        button.btn.btn-sm.btn-success.float-right(type="button", (click)="onAddIngredient()") Add ingredient
+
