@@ -13,6 +13,8 @@ export class CRecipeDetailComponent implements OnInit, OnDestroy {
 
   public recipe!: Recipe;
 
+  private index!: number;
+
   private recipeSelected!: Subscription;
 
   constructor(private recipesService: RecipesService, private activatedRoute: ActivatedRoute, private router: Router) {
@@ -22,8 +24,8 @@ export class CRecipeDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.recipeSelected = this.activatedRoute.params.subscribe(
       (params: Params) => {
-        let index = params['id'];
-        this.recipe = this.recipesService.getRecipe(index);
+        this.index = params['id'];
+        this.recipe = this.recipesService.getRecipe(this.index);
       }
     );
   }
@@ -38,6 +40,12 @@ export class CRecipeDetailComponent implements OnInit, OnDestroy {
 
   public onEditRecipe(): void {
     this.router.navigate(['edit'], { relativeTo: this.activatedRoute });
+  }
+
+  public onDeleteRecipe(): void {
+    this.recipesService.deleteRecipe(this.index);
+
+    this.router.navigate(['..'], { relativeTo: this.activatedRoute });
   }
 
 }

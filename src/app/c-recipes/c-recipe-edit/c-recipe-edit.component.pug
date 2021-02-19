@@ -1,9 +1,9 @@
-form("[formGroup]"="formGroup", "(ngSubmit)"="onSubmit()")
+form("[formGroup]"="formGroup", (ngSubmit)="onSubmit()")
   .form-row
     .form-group.col-sm-6
-      button.btn.btn-sm.btn-danger(type="button") Cancel
+      button.btn.btn-sm.btn-danger(type="button", (click)="onCancel()") Cancel
     .form-group.col-sm-6
-      button.btn.btn-sm.btn-success.float-right(type="submit") Save
+      button.btn.btn-sm.btn-success.float-right(type="submit", [disabled]="formGroup.invalid || formGroup.pristine") Save
   .form-group.row
     label.col-sm-2.col-form-label(for="name") Name
     .col-sm-10
@@ -11,10 +11,10 @@ form("[formGroup]"="formGroup", "(ngSubmit)"="onSubmit()")
   .form-group.row
     label.col-sm-2.col-form-label(for="image") Image
     .col-sm-10
-      input.form-control#image(type="url", formControlName="image")
+      input.form-control#image(type="url", formControlName="image", #image="")
   .form-group.row
-    .col-xs-12
-      img.img-responsive(src="")
+    .col-xs-12.mx-auto.text-center
+      img([src]="image.value", onerror="this.src='https://wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg'")
   .form-group.row
     label.col-sm-2.col-form-label(for="description") Description
     .col-sm-10
@@ -22,12 +22,12 @@ form("[formGroup]"="formGroup", "(ngSubmit)"="onSubmit()")
   hr
   div(formArrayName="ingredients")
     h3 Ingredients
-    .form-row(*ngFor="let ingredientControl of ingredientControls; let i = index", [formGroupName]="i")
+    .form-row(*ngFor="let ingredientControl of ingredientsFormArray.controls; let i = index", [formGroupName]="i")
       .form-group.col-10
         label Name
         .input-group.input-group-sm
           .input-group-prepend
-            button.btn.btn-outline-danger(type="button") X
+            button.btn.btn-outline-danger((click)="onDeleteIngredient(i)", type="button") X
           input.form-control(type="text", formControlName="name")
       .form-group.col-2
         label Amount

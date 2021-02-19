@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Ingredient } from 'src/app/shared/ingredient.model';
 import * as _ from 'underscore';
 import { Recipe } from '../recipe.model';
 import { RecipesService } from '../recipes.service';
@@ -23,7 +24,7 @@ export class CRecipeEditComponent implements OnInit, OnDestroy {
 
   public formGroup!: FormGroup;
 
-  constructor(private activatedRoute: ActivatedRoute, private recipesService: RecipesService) { }
+  constructor(private activatedRoute: ActivatedRoute, private recipesService: RecipesService, private router: Router) { }
 
   ngOnInit(): void {
     this.paramsSubscription = this.activatedRoute.params.subscribe(
@@ -60,10 +61,17 @@ export class CRecipeEditComponent implements OnInit, OnDestroy {
               new FormGroup(
                 {
                   'name': new FormControl(
-                    ingredient.name
+                    ingredient.name,
+                    [
+                      Validators.required
+                    ]
                   ),
                   'amount': new FormControl(
-                    ingredient.amount
+                    ingredient.amount,
+                    [
+                      Validators.required,
+                      Validators.pattern(/^[1-9]+[0-9]*$/)
+                    ]
                   )
                 }
               )
@@ -76,40 +84,86 @@ export class CRecipeEditComponent implements OnInit, OnDestroy {
     this.formGroup = new FormGroup(
       {
         'name': new FormControl(
-          name
+          name,
+          [
+            Validators.required
+          ]
         ),
         'image': new FormControl(
-          image
+          image,
+          [
+            Validators.required
+          ]
         ),
         'description': new FormControl(
-          description
+          description,
+          [
+            Validators.required
+          ]
         ),
         'ingredients': ingredients
       }
     );
   }
 
-  get ingredientControls(): AbstractControl[] {
-    return (this.formGroup.get('ingredients') as FormArray).controls;
+  get ingredientsFormArray(): FormArray {
+    return (this.formGroup.get('ingredients') as FormArray);
   }
 
   onAddIngredient(): void {
-    this.ingredientControls.push(
+    this.ingredientsFormArray.push(
       new FormGroup(
         {
           'name': new FormControl(
-            ''
+            '',
+            [
+              Validators.required
+            ]
           ),
           'amount': new FormControl(
-            1
+            null,
+            [
+              Validators.required,
+              Validators.pattern(/^[1-9]+[0-9]*$/)
+            ]
           )
         }
       )
-    )
+    );
+  }
+
+  onDeleteIngredient(index: number): void {
+    this.ingredientsFormArray.removeAt(index);
+    this.ingredientsFormArray.markAsDirty();
   }
 
   onSubmit(): void {
-    console.log(this.formGroup);
+    let ingredients: Ingredient[] = _.map(
+      this.formGroup.value['ingredients'],
+      function(ingredientValues: { name: string, amount: number }) {
+        return new Ingredient(ingredientValues.name, ingredientValues.amount);
+      }
+    );
+
+    const recipe = new Recipe(
+      this.formGroup.value['name'],
+      this.formGroup.value['description'],
+      this.formGroup.value['image'],
+      ingredients
+    );
+
+    if (this.editMode) {
+      this.recipesService.updateRecipe(this.index, recipe);
+      this.router.navigate(['..'], { relativeTo: this.activatedRoute });
+    }
+    else {
+      this.recipesService.addRecipe(recipe);
+      this.router.navigate(['..', 0], { relativeTo: this.activatedRoute });
+    }
+  }
+
+  onCancel(): void {
+    this.router.navigate(['..',], { relativeTo: this.activatedRoute });
   }
 
   ngOnDestroy(): void {

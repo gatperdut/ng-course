@@ -1,5 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
-input.ng-invalid.ng-touched {
-  border-left: 3px solid red;
+input,
+textarea {
+  outline: none;
+  box-shadow: none !important;
+  border: 1px solid #CCCCCC !important;
+
+  &.ng-invalid {
+    border-left: 3px solid red !important;
+  }
 }
