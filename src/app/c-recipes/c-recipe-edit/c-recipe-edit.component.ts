@@ -137,6 +137,11 @@ export class CRecipeEditComponent implements OnInit, OnDestroy {
     this.ingredientsFormArray.markAsDirty();
   }
 
+  onDeleteAllIngredients(): void {
+    this.ingredientsFormArray.clear();
+    this.ingredientsFormArray.markAsDirty();
+  }
+
   onSubmit(): void {
     let ingredients: Ingredient[] = _.map(
       this.formGroup.value['ingredients'],
