@@ -15,9 +15,9 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
         a#navbarDropdown.nav-link.dropdown-toggle(role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
           | Data
         .dropdown-menu(aria-labelledby='navbarDropdown')
-          a.dropdown-item Save
+          button.btn.btn-default.dropdown-item((click)="onSave()") Save
           .dropdown-divider
-          a.dropdown-item Fetch
+          button.btn.btn-default.dropdown-item((click)="onLoad()") Fetch
 
   button.btn.btn-success("(click)"="onNewRecipe()")
     | New Recipe

@@ -5,6 +5,7 @@ import { CRecipeDetailComponent } from './c-recipes/c-recipe-detail/c-recipe-det
 import { CRecipeEditComponent } from './c-recipes/c-recipe-edit/c-recipe-edit.component';
 import { CRecipeStartComponent } from './c-recipes/c-recipe-start/c-recipe-start.component';
 import { CRecipesComponent } from './c-recipes/c-recipes.component';
+import { RecipesResolverService } from './c-recipes/recipes-resolver.service';
 import { CShoppingListComponent } from './c-shopping-list/c-shopping-list.component';
 
 const routes: Routes = [
@@ -28,11 +29,17 @@ const routes: Routes = [
       },
       {
         path: ':id',
-        component: CRecipeDetailComponent
+        component: CRecipeDetailComponent,
+        resolve: [
+          RecipesResolverService
+        ]
       },
       {
         path: ':id/edit',
-        component: CRecipeEditComponent
+        component: CRecipeEditComponent,
+        resolve: [
+          RecipesResolverService
+        ]
       }
     ]
   },

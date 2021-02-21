@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { DataStorageService } from "../shared/data-storage.service";
 
 @Component({
   selector: 'c-header',
@@ -8,7 +9,7 @@ import { Router } from "@angular/router";
 })
 export class CHeaderComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private dataStorageService: DataStorageService) {
 
   }
 
@@ -18,6 +19,14 @@ export class CHeaderComponent implements OnInit {
 
   public onNewRecipe(): void {
     this.router.navigate(['/recipes', 'new']);
+  }
+
+  public onSave(): void {
+    this.dataStorageService.save();
+  }
+
+  public onLoad(): void {
+    this.dataStorageService.load().subscribe();
   }
 
 }

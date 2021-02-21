@@ -1,6 +1,7 @@
 import { Ingredient } from "../shared/ingredient.model";
+import { RecipeData } from "./recipe-data.interface";
 
-export class Recipe {
+export class Recipe implements RecipeData {
 
   public readonly name: string;
 
@@ -8,7 +9,7 @@ export class Recipe {
 
   public readonly image: string;
 
-  private ingredients: Ingredient[];
+  public readonly ingredients: Ingredient[];
 
   constructor(name: string, description: string, image: string, ingredients: Ingredient[]) {
     this.name        = name;
