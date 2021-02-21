@@ -24,7 +24,8 @@ export class DataStorageService {
     this.httpClient.put<RecipeData[]>(
       this.url + 'recipes.json',
       recipes
-    );
+    )
+    .subscribe();
   }
 
   public load(): Observable<RecipeData[]> {
@@ -34,6 +35,10 @@ export class DataStorageService {
     .pipe(
       map(
         (recipesData: RecipeData[]) => {
+          if (!recipesData) {
+            return [];
+          }
+
           return recipesData.map(
             (recipeData: RecipeData) => {
               return {
