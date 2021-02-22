@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CAuthenticationComponent } from './c-authentication/c-authentication.component';
-import { CShoppingListComponent } from './c-shopping-list/c-shopping-list.component';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
 const routes: Routes = [
   {
@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'shopping-list',
-    component: CShoppingListComponent
+    component: ShoppingListComponent
   },
   {
     path: 'authentication',

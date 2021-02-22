@@ -2,14 +2,14 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Ingredient } from 'src/app/shared/ingredient.model';
-import { ShoppingListService } from '../shopping-list.service';
+import { ShoppingListService } from '../services/shopping-list.service';
 
 @Component({
-  selector: 'c-shopping-list-editor',
-  templateUrl: './c-shopping-list-editor.component.html',
-  styleUrls: ['./c-shopping-list-editor.component.scss']
+  selector: 'shopping-list-editor',
+  templateUrl: './shopping-list-editor.component.html',
+  styleUrls: ['./shopping-list-editor.component.scss']
 })
-export class CShoppingListEditorComponent implements OnInit, OnDestroy {
+export class ShoppingListEditorComponent implements OnInit, OnDestroy {
 
   @ViewChild('ngForm', { static: false }) private ngForm!: NgForm;
 

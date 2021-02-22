@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from "@angular/core";
 import { Subject } from "rxjs";
 import * as _ from "underscore";
-import { Ingredient } from "../shared/ingredient.model";
+import { Ingredient } from "../../shared/ingredient.model";
 
 @Injectable({ providedIn: 'root' })
 export class ShoppingListService implements OnInit {

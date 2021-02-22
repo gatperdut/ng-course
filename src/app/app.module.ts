@@ -5,8 +5,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CHeaderComponent } from './c-header/c-header.component';
-import { CShoppingListComponent } from './c-shopping-list/c-shopping-list.component';
-import { CShoppingListEditorComponent } from './c-shopping-list/c-shopping-list-editor/c-shopping-list-editor.component';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { ShoppingListEditorComponent } from './shopping-list/shopping-list-editor/shopping-list-editor.component';
 import { CDropdownDirective } from './reference/dropdown.directive'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CHighlightDirective } from './reference/c-highlight.directive';
@@ -21,8 +21,8 @@ import { RecipesModule } from './recipes/recipes.module';
   declarations: [
     AppComponent,
     CHeaderComponent,
-    CShoppingListComponent,
-    CShoppingListEditorComponent,
+    ShoppingListComponent,
+    ShoppingListEditorComponent,
     CDropdownDirective,
     CHighlightDirective,
     CAuthenticationComponent,
