@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Recipe } from '../recipe.model';
+import { Recipe } from '../models/recipe.model';
 import { RecipesService } from '../services/recipes.service';
 
 @Component({
-  selector: 'c-recipe-start',
-  templateUrl: './c-recipe-start.component.html',
-  styleUrls: ['./c-recipe-start.component.scss']
+  selector: 'recipe-start',
+  templateUrl: './recipe-start.component.html',
+  styleUrls: ['./recipe-start.component.scss']
 })
-export class CRecipeStartComponent implements OnInit, OnDestroy {
+export class RecipeStartComponent implements OnInit, OnDestroy {
 
   private recipesChangedSubscription!: Subscription;
 

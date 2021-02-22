@@ -1,4 +1,4 @@
-import { Ingredient } from "../shared/ingredient.model";
+import { Ingredient } from "../../shared/ingredient.model";
 import { RecipeData } from "./recipe-data.interface";
 
 export class Recipe implements RecipeData {

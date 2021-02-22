@@ -4,15 +4,15 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import * as _ from 'underscore';
-import { Recipe } from '../recipe.model';
+import { Recipe } from '../models/recipe.model';
 import { RecipesService } from '../services/recipes.service';
 
 @Component({
-  selector: 'app-c-recipe-edit',
-  templateUrl: './c-recipe-edit.component.html',
-  styleUrls: ['./c-recipe-edit.component.scss']
+  selector: 'app-recipe-edit',
+  templateUrl: './recipe-edit.component.html',
+  styleUrls: ['./recipe-edit.component.scss']
 })
-export class CRecipeEditComponent implements OnInit, OnDestroy {
+export class RecipeEditComponent implements OnInit, OnDestroy {
 
   private index!: number;
 

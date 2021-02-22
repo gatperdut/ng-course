@@ -3,12 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationGuardService } from './c-authentication/authentication-guard.service';
 import { CAuthenticationComponent } from './c-authentication/c-authentication.component';
 
-import { CRecipeDetailComponent } from './c-recipes/c-recipe-detail/c-recipe-detail.component';
-import { CRecipeEditComponent } from './c-recipes/c-recipe-edit/c-recipe-edit.component';
-import { CRecipeStartComponent } from './c-recipes/c-recipe-start/c-recipe-start.component';
-import { CRecipesComponent } from './c-recipes/c-recipes.component';
-import { RecipesResolverService } from './c-recipes/services/recipes-resolver.service';
+import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
+import { RecipesResolverService } from './recipes/services/recipes-resolver.service';
 import { CShoppingListComponent } from './c-shopping-list/c-shopping-list.component';
+import { RecipesComponent } from './recipes/recipes.component';
 
 const routes: Routes = [
   {
@@ -18,30 +18,30 @@ const routes: Routes = [
   },
   {
     path: 'recipes',
-    component: CRecipesComponent,
+    component: RecipesComponent,
     canActivate: [
       AuthenticationGuardService
     ],
     children: [
       {
         path: '',
-        component: CRecipeStartComponent,
+        component: RecipeStartComponent,
         pathMatch: 'full'
       },
       {
         path: 'new',
-        component: CRecipeEditComponent
+        component: RecipeEditComponent
       },
       {
         path: ':id',
-        component: CRecipeDetailComponent,
+        component: RecipeDetailComponent,
         resolve: [
           RecipesResolverService
         ]
       },
       {
         path: ':id/edit',
-        component: CRecipeEditComponent,
+        component: RecipeEditComponent,
         resolve: [
           RecipesResolverService
         ]

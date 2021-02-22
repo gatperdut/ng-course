@@ -4,9 +4,9 @@ import { Observable } from "rxjs";
 import { map, tap } from 'rxjs/operators';
 import * as _ from "underscore";
 import { AuthenticationService } from "../c-authentication/authentication.service";
-import { RecipeData } from "../c-recipes/recipe-data.interface";
-import { Recipe } from "../c-recipes/recipe.model";
-import { RecipesService } from "../c-recipes/services/recipes.service";
+import { RecipeData } from "../recipes/models/recipe-data.interface";
+import { Recipe } from "../recipes/models/recipe.model";
+import { RecipesService } from "../recipes/services/recipes.service";
 
 @Injectable({
   providedIn: 'root'

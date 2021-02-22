@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Recipe } from '../recipe.model';
+import { Recipe } from '../models/recipe.model';
 import { RecipesService } from '../services/recipes.service';
 
 @Component({
-  selector: 'c-recipe-detail',
-  templateUrl: './c-recipe-detail.component.html',
-  styleUrls: ['./c-recipe-detail.component.scss']
+  selector: 'recipe-detail',
+  templateUrl: './recipe-detail.component.html',
+  styleUrls: ['./recipe-detail.component.scss']
 })
-export class CRecipeDetailComponent implements OnInit, OnDestroy {
+export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   public recipe!: Recipe;
 
