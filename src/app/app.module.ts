@@ -5,8 +5,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CHeaderComponent } from './c-header/c-header.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingListEditorComponent } from './shopping-list/shopping-list-editor/shopping-list-editor.component';
 import { CDropdownDirective } from './reference/dropdown.directive'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CHighlightDirective } from './reference/c-highlight.directive';
@@ -16,13 +14,12 @@ import { AuthenticationInterceptorService } from './c-authentication/authenticat
 import { CAlertComponent } from './shared/c-alert/c-alert.component';
 import { CPlaceholderDirective } from './shared/c-placeholder/c-placeholder.directive';
 import { RecipesModule } from './recipes/recipes.module';
+import { ShoppingListModule } from './shopping-list/shopping-list.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     CHeaderComponent,
-    ShoppingListComponent,
-    ShoppingListEditorComponent,
     CDropdownDirective,
     CHighlightDirective,
     CAuthenticationComponent,
@@ -36,7 +33,8 @@ import { RecipesModule } from './recipes/recipes.module';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    RecipesModule
+    RecipesModule,
+    ShoppingListModule
   ],
   providers: [
     {
