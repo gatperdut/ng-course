@@ -3,12 +3,12 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map, tap } from 'rxjs/operators';
 import * as _ from "underscore";
-import { AuthenticationService } from "../authentication/services/authentication.service";
-import { RecipeData } from "../recipes/models/recipe-data.interface";
-import { Recipe } from "../recipes/models/recipe.model";
-import { RecipesService } from "../recipes/services/recipes.service";
-import { IngredientData } from "./ingredient-data.interface";
-import { Ingredient } from "./ingredient.model";
+import { AuthenticationService } from "../../authentication/services/authentication.service";
+import { RecipeData } from "../../recipes/models/recipe-data.interface";
+import { Recipe } from "../../recipes/models/recipe.model";
+import { RecipesService } from "../../recipes/services/recipes.service";
+import { IngredientData } from "../models/ingredient-data.interface";
+import { Ingredient } from "../models/ingredient.model";
 
 @Injectable({
   providedIn: 'root'

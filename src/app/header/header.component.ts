@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { AuthenticationService } from "../authentication/services/authentication.service";
 import { User } from "../authentication/models/user.model";
-import { DataStorageService } from "../shared/data-storage.service";
+import { DataStorageService } from "../shared/services/data-storage.service";
 
 @Component({
   selector: 'header',
