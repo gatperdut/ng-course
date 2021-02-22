@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map, tap } from 'rxjs/operators';
 import * as _ from "underscore";
+import { AuthenticationService } from "../c-authentication/authentication.service";
 import { RecipeData } from "../c-recipes/recipe-data.interface";
 import { Recipe } from "../c-recipes/recipe.model";
 import { RecipesService } from "../c-recipes/recipes.service";
@@ -14,7 +15,11 @@ export class DataStorageService {
 
   private readonly url = 'https://ng-course-9d157-default-rtdb.europe-west1.firebasedatabase.app/';
 
-  constructor(private httpClient: HttpClient, private recipesService: RecipesService) {
+  constructor(
+    private httpClient: HttpClient,
+    private recipesService: RecipesService,
+    private authenticationService: AuthenticationService
+  ) {
 
   }
 
@@ -34,13 +39,13 @@ export class DataStorageService {
     )
     .pipe(
       map(
-        (recipesData: RecipeData[]) => {
+        (recipesData: RecipeData[]): RecipeData[] => {
           if (!recipesData) {
             return [];
           }
 
           return recipesData.map(
-            (recipeData: RecipeData) => {
+            (recipeData: RecipeData): RecipeData => {
               return {
                 ...recipeData,
                 ingredients: (recipeData.ingredients) ? recipeData.ingredients : []

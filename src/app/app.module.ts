@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CHighlightDirective } from './reference/c-highlight.directive';
 import { CRecipeStartComponent } from './c-recipes/c-recipe-start/c-recipe-start.component';
 import { CRecipeEditComponent } from './c-recipes/c-recipe-edit/c-recipe-edit.component';
+import { CAuthenticationComponent } from './c-authentication/c-authentication.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthenticationInterceptorService } from './c-authentication/authentication-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { CRecipeEditComponent } from './c-recipes/c-recipe-edit/c-recipe-edit.co
     CDropdownDirective,
     CHighlightDirective,
     CRecipeStartComponent,
-    CRecipeEditComponent
+    CRecipeEditComponent,
+    CAuthenticationComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +44,13 @@ import { CRecipeEditComponent } from './c-recipes/c-recipe-edit/c-recipe-edit.co
     HttpClientModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

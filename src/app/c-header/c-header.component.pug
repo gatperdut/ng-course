@@ -5,13 +5,13 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
     span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     ul.navbar-nav.mr-auto
-      li.nav-item(routerLinkActive="active")
+      li.nav-item(routerLinkActive="active", *ngIf="authenticated")
         a.nav-link(routerLink="/recipes")
           | Recipes
       li.nav-item(routerLinkActive="active")
         a.nav-link(routerLink="/shopping-list")
           | Shopping List
-      li.nav-item.dropdown
+      li.nav-item.dropdown(*ngIf="authenticated")
         a#navbarDropdown.nav-link.dropdown-toggle(role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
           | Data
         .dropdown-menu(aria-labelledby='navbarDropdown')
@@ -19,5 +19,8 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
           .dropdown-divider
           button.btn.btn-default.dropdown-item((click)="onLoad()") Fetch
 
-  button.btn.btn-success("(click)"="onNewRecipe()")
-    | New Recipe
+  button.btn.btn-sm.btn-outline-primary.mr-1("(click)"="onNewRecipe()", *ngIf="authenticated") New recipe
+
+  button.btn.btn-sm.btn-outline-secondary(*ngIf="authenticated", (click)="onSignout()") Logout
+  button.btn.btn-sm.btn-outline-secondary(*ngIf="!authenticated", (click)="onAuthenticate()") Authenticate
+

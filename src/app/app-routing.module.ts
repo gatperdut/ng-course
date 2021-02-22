@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthenticationGuardService } from './c-authentication/authentication-guard.service';
+import { CAuthenticationComponent } from './c-authentication/c-authentication.component';
 
 import { CRecipeDetailComponent } from './c-recipes/c-recipe-detail/c-recipe-detail.component';
 import { CRecipeEditComponent } from './c-recipes/c-recipe-edit/c-recipe-edit.component';
@@ -17,6 +19,9 @@ const routes: Routes = [
   {
     path: 'recipes',
     component: CRecipesComponent,
+    canActivate: [
+      AuthenticationGuardService
+    ],
     children: [
       {
         path: '',
@@ -46,6 +51,10 @@ const routes: Routes = [
   {
     path: 'shopping-list',
     component: CShoppingListComponent
+  },
+  {
+    path: 'authentication',
+    component: CAuthenticationComponent
   }
 ];
 
