@@ -4,9 +4,9 @@ import { ElementRef, HostBinding, HostListener, Input } from '@angular/core';
 import { Directive, OnInit, Renderer2 } from '@angular/core';
 
 @Directive({
-  selector: '[c-highlight]'
+  selector: '[highlight]'
 })
-export class CHighlightDirective implements OnInit {
+export class HighlightDirective implements OnInit {
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) { }
 

@@ -1,4 +1,4 @@
-.c-alert-backdrop {
+.alert-backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,7 +8,7 @@
   z-index: 50;
 }
 
-.c-alert-box {
+.alert-box {
   position: fixed;
   top: 30vh;
   left: 20vw;
@@ -18,7 +18,7 @@
   background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 
-  .c-alert-box-actions {
+  .alert-box-actions {
     text-align: right;
   }
 }

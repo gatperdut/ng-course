@@ -3,7 +3,7 @@
 import { Directive, HostListener, HostBinding } from '@angular/core';
 
 @Directive({
-  selector: '[c-dropdown]'
+  selector: '[dropdown]'
 })
 export class CDropdownDirective {
   @HostBinding('class.open') open = false;

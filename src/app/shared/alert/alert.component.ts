@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
-  selector: 'c-alert',
-  templateUrl: './c-alert.component.html',
-  styleUrls: ['./c-alert.component.scss']
+  selector: 'alert',
+  templateUrl: './alert.component.html',
+  styleUrls: ['./alert.component.scss']
 })
-export class CAlertComponent {
+export class AlertComponent {
 
   @Input() message: string;
 

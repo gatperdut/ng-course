@@ -2,8 +2,8 @@ import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, On
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Observable, Subscription } from "rxjs";
-import { CAlertComponent } from "../shared/c-alert/c-alert.component";
-import { CPlaceholderDirective } from "../shared/c-placeholder/c-placeholder.directive";
+import { AlertComponent } from "../shared/alert/alert.component";
+import { PlaceholderDirective } from "../shared/placeholder/placeholder.directive";
 import { AuthenticationResponseData } from "./authentication-response-data.interface";
 import { AuthenticationService } from "./authentication.service";
 
@@ -20,7 +20,7 @@ export class CAuthenticationComponent implements OnDestroy {
 
   public error: string = null;
 
-  @ViewChild(CPlaceholderDirective, { static: false }) cAlertComponentHost: CPlaceholderDirective;
+  @ViewChild(PlaceholderDirective, { static: false }) cAlertComponentHost: PlaceholderDirective;
 
   private onAlertCloseSubscription: Subscription;
 
@@ -78,13 +78,13 @@ export class CAuthenticationComponent implements OnDestroy {
   }
 
   private handleError(message: string): void {
-    const cAlertComponentFactory: ComponentFactory<CAlertComponent> = this.componentFactoryResolver.resolveComponentFactory(CAlertComponent);
+    const cAlertComponentFactory: ComponentFactory<AlertComponent> = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
 
     const cAlertComponentHostViewContainerRef: ViewContainerRef = this.cAlertComponentHost.viewContainerRef;
 
     cAlertComponentHostViewContainerRef.clear();
 
-    const cAlertComponent: ComponentRef<CAlertComponent> = cAlertComponentHostViewContainerRef.createComponent(cAlertComponentFactory);
+    const cAlertComponent: ComponentRef<AlertComponent> = cAlertComponentHostViewContainerRef.createComponent(cAlertComponentFactory);
 
     cAlertComponent.instance.message = message;
 
