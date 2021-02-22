@@ -1,16 +1,16 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { AuthenticationService } from "../c-authentication/authentication.service";
-import { User } from "../c-authentication/user.model";
+import { AuthenticationService } from "../authentication/services/authentication.service";
+import { User } from "../authentication/models/user.model";
 import { DataStorageService } from "../shared/data-storage.service";
 
 @Component({
-  selector: 'c-header',
-  templateUrl: './c-header.component.html',
-  styleUrls: ['./c-header.component.scss']
+  selector: 'header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
-export class CHeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   private userSubscription: Subscription = new Subscription();
 

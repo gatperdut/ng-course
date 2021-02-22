@@ -1,10 +1,9 @@
-export class Ingredient {
-  public name: string;
-  public amount: number;
+import { IngredientData } from "./ingredient-data.interface";
 
-  constructor(name: string, amount: number) {
-    this.name   = name;
-    this.amount = amount;
+export class Ingredient implements IngredientData {
+
+  constructor(public name: string, public amount: number) {
+
   }
 
   public addAmount(amount: number):void {
@@ -18,4 +17,5 @@ export class Ingredient {
   public valid(): boolean {
     return !!this.name && !!this.amount;
   }
+
 }

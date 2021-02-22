@@ -6,5 +6,5 @@ export interface UserData {
 
   readonly _token: string;
 
-  readonly _tokenExpirationDate: string;
+  readonly _tokenExpirationDate: Date;
 }

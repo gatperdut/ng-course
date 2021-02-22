@@ -3,10 +3,12 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map, tap } from 'rxjs/operators';
 import * as _ from "underscore";
-import { AuthenticationService } from "../c-authentication/authentication.service";
+import { AuthenticationService } from "../authentication/services/authentication.service";
 import { RecipeData } from "../recipes/models/recipe-data.interface";
 import { Recipe } from "../recipes/models/recipe.model";
 import { RecipesService } from "../recipes/services/recipes.service";
+import { IngredientData } from "./ingredient-data.interface";
+import { Ingredient } from "./ingredient.model";
 
 @Injectable({
   providedIn: 'root'
@@ -59,11 +61,25 @@ export class DataStorageService {
           let recipes: Recipe[] = _.map(
             recipesData,
             (recipeData: RecipeData) => {
+              const ingredients: Ingredient[] = [];
+
+              _.each(
+                recipeData.ingredients,
+                (ingredientData: IngredientData): void => {
+                  ingredients.push(
+                    new Ingredient(
+                      ingredientData.name,
+                      ingredientData.amount
+                    )
+                  );
+                }
+              );
+
               return new Recipe(
                 recipeData.name,
                 recipeData.description,
                 recipeData.image,
-                recipeData.ingredients
+                ingredients
               );
             }
           );

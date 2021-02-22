@@ -1,6 +1,8 @@
-export class User {
+import { UserData } from "./user-data.interface";
 
-  constructor(public id: string, public email: string, private _token: string, public _tokenExpirationDate: Date) {
+export class User implements UserData {
+
+  constructor(public id: string, public email: string, public _token: string, public _tokenExpirationDate: Date) {
 
   }
 

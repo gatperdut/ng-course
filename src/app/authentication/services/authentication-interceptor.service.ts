@@ -2,13 +2,15 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest } from
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { exhaustMap, take } from "rxjs/operators";
+import { User } from "../models/user.model";
 import { AuthenticationService } from "./authentication.service";
-import { User } from "./user.model";
 
 @Injectable()
 export class AuthenticationInterceptorService implements HttpInterceptor {
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(
+    private authenticationService: AuthenticationService
+  ) {
 
   }
 

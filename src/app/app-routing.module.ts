@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CAuthenticationComponent } from './c-authentication/c-authentication.component';
+import { AuthenticationComponent } from './authentication/authentication.component';
+
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: '/recipes',
     pathMatch: 'full'
-  },
-  {
-    path: 'authentication',
-    component: CAuthenticationComponent
   }
 ];
 

@@ -1,11 +1,11 @@
-import { HttpClient, HttpErrorResponse, HttpHandler, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
-import { AuthenticationResponseData } from "./authentication-response-data.interface";
-import { UserData } from "./user-data.interface";
-import { User } from "./user.model";
+import { AuthenticationResponseData } from "../models/authentication-response-data.interface";
+import { UserData } from "../models/user-data.interface";
+import { User } from "../models/user.model";
 
 @Injectable({
   providedIn: 'root'
