@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
-import { ShoppingListService } from "../c-shopping-list/shopping-list.service";
-import { Ingredient } from "../shared/ingredient.model";
+import { ShoppingListService } from "../../c-shopping-list/shopping-list.service";
+import { Ingredient } from "../../shared/ingredient.model";
 
-import { Recipe } from "./recipe.model";
+import { Recipe } from "../recipe.model";
 
 @Injectable({
   providedIn: 'root'

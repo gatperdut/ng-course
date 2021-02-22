@@ -34,6 +34,9 @@ export class AuthenticationService {
 
     if (httpErrorResponse.error && httpErrorResponse.error.error) {
       switch (httpErrorResponse.error.error.message) {
+        case 'INVALID_EMAIL':
+          message = 'The email address is not valid.';
+          break;
         case 'EMAIL_EXISTS':
           message = 'This email address is already registered.';
           break;

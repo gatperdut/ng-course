@@ -6,7 +6,7 @@ import * as _ from "underscore";
 import { AuthenticationService } from "../c-authentication/authentication.service";
 import { RecipeData } from "../c-recipes/recipe-data.interface";
 import { Recipe } from "../c-recipes/recipe.model";
-import { RecipesService } from "../c-recipes/recipes.service";
+import { RecipesService } from "../c-recipes/services/recipes.service";
 
 @Injectable({
   providedIn: 'root'

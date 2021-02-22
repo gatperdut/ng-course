@@ -1,7 +1,9 @@
-import { Component } from "@angular/core";
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, ViewChild, ViewContainerRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
+import { CAlertComponent } from "../shared/c-alert/c-alert.component";
+import { CPlaceholderDirective } from "../shared/c-placeholder/c-placeholder.directive";
 import { AuthenticationResponseData } from "./authentication-response-data.interface";
 import { AuthenticationService } from "./authentication.service";
 
@@ -10,21 +12,39 @@ import { AuthenticationService } from "./authentication.service";
   templateUrl: './c-authentication.component.html',
   styleUrls: ['./c-authentication.component.scss']
 })
-export class CAuthenticationComponent {
+export class CAuthenticationComponent implements OnDestroy {
 
-  signinMode: boolean = true;
+  public signinMode: boolean = true;
 
-  loading: boolean = false;
+  public loading: boolean = false;
 
-  error: string = null;
+  public error: string = null;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
+  @ViewChild(CPlaceholderDirective, { static: false }) cAlertComponentHost: CPlaceholderDirective;
+
+  private onAlertCloseSubscription: Subscription;
+
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private componentFactoryResolver: ComponentFactoryResolver
+  ) {
 
   }
 
-  onSwitchMode(): void {
+  public ngOnDestroy(): void {
+    if (this.onAlertCloseSubscription && !this.onAlertCloseSubscription.closed) {
+      this.onAlertCloseSubscription.unsubscribe();
+    }
+  }
+
+  public onSwitchMode(): void {
     this.signinMode = !this.signinMode;
   }
+
+  // public onCloseAlert(): void {
+  //   this.error = null;
+  // }
 
   onSubmit(ngForm: NgForm): void {
     const email: string = ngForm.value.email;
@@ -48,12 +68,33 @@ export class CAuthenticationComponent {
         this.loading = false;
       },
       (errorMessage: string) => {
-        this.error = errorMessage;
+        // this.error = errorMessage;
+        this.handleError(errorMessage);
         this.loading = false;
       }
     );
 
     ngForm.reset();
+  }
+
+  private handleError(message: string): void {
+    const cAlertComponentFactory: ComponentFactory<CAlertComponent> = this.componentFactoryResolver.resolveComponentFactory(CAlertComponent);
+
+    const cAlertComponentHostViewContainerRef: ViewContainerRef = this.cAlertComponentHost.viewContainerRef;
+
+    cAlertComponentHostViewContainerRef.clear();
+
+    const cAlertComponent: ComponentRef<CAlertComponent> = cAlertComponentHostViewContainerRef.createComponent(cAlertComponentFactory);
+
+    cAlertComponent.instance.message = message;
+
+    this.onAlertCloseSubscription = cAlertComponent.instance.onCloseEventEmitter.subscribe(
+      (): void => {
+        cAlertComponentHostViewContainerRef.clear();
+
+        this.onAlertCloseSubscription.unsubscribe();
+      }
+    );
   }
 
 }

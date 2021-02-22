@@ -19,6 +19,8 @@ import { CRecipeEditComponent } from './c-recipes/c-recipe-edit/c-recipe-edit.co
 import { CAuthenticationComponent } from './c-authentication/c-authentication.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthenticationInterceptorService } from './c-authentication/authentication-interceptor.service';
+import { CAlertComponent } from './shared/c-alert/c-alert.component';
+import { CPlaceholderDirective } from './shared/c-placeholder/c-placeholder.directive';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { AuthenticationInterceptorService } from './c-authentication/authenticat
     CRecipeStartComponent,
     CRecipeEditComponent,
     CAuthenticationComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    CAlertComponent,
+    CPlaceholderDirective
   ],
   imports: [
     BrowserModule,

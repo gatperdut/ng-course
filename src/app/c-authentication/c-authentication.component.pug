@@ -4,9 +4,13 @@
     h3(*ngIf="signinMode") Sign in
     h3(*ngIf="!signinMode") Sign up
 
-    .alert.alert-danger(*ngIf="error")
-      div.font-weight-bold An error occurred:
-      div {{ error }}
+    //- .alert.alert-danger(*ngIf="error")
+    //-   div.font-weight-bold An error occurred:
+    //-   div {{ error }}
+
+    //- c-alert(*ngIf="error", (onClose)="onCloseAlert()", [message]="error")
+
+    ng-template(cPlaceholder)
 
     loading-spinner(*ngIf="loading")
 

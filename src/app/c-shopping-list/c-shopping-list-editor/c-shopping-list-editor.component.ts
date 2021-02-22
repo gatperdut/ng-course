@@ -11,7 +11,7 @@ import { ShoppingListService } from '../shopping-list.service';
 })
 export class CShoppingListEditorComponent implements OnInit, OnDestroy {
 
-  @ViewChild('ngForm') private ngForm!: NgForm;
+  @ViewChild('ngForm', { static: false }) private ngForm!: NgForm;
 
   ingredientSelected!: Subscription;
 
