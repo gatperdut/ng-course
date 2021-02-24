@@ -39,23 +39,6 @@ export class ShoppingListService implements OnInit {
     return this.getIngredients()[index];
   }
 
-  private addIngredient(ingredient: Ingredient): void {
-    let previousIngredient = _.findWhere(this.ingredients, { name: ingredient.name });
-
-    if (previousIngredient) {
-      previousIngredient.addAmount(ingredient.amount);
-    }
-    else {
-      this.ingredients.push(ingredient.clone());
-    }
-  }
-
-  public addIngredients(ingredients: Ingredient[]): void {
-    _.each(ingredients, ingredient => this.addIngredient(ingredient));
-
-    this.ingredientsChanged.next(this.getIngredients());
-  }
-
   public updateIngredient(index: number, ingredient: Ingredient): void {
     this.ingredients[index] = ingredient;
 

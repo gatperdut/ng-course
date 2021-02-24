@@ -1,7 +1,7 @@
 export interface IngredientData {
 
-  readonly name: string;
+  name: string;
 
-  readonly amount: number;
+  amount: number;
 
 }
