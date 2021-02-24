@@ -6,6 +6,7 @@ import { Ingredient } from 'src/app/shared/models/ingredient.model';
 import { ShoppingListService } from '../services/shopping-list.service';
 import { AppState } from 'src/app/store/app.state';
 import { AddIngredientAction } from '../store/actions/add-ingredient.action';
+import { UpdateIngredientAction, UpdateIngredientActionData } from '../store/actions/update-ingredient.action';
 
 @Component({
   selector: 'shopping-list-editor',
@@ -52,7 +53,11 @@ export class ShoppingListEditorComponent implements OnInit, OnDestroy {
     const ingredient: Ingredient = new Ingredient(value.name, value.amount);
 
     if (this.editingIndex >= 0) {
-      this.shoppingListService.updateIngredient(this.editingIndex, ingredient);
+      let updateIngredientActionData: UpdateIngredientActionData = {
+        index: this.editingIndex,
+        ingredient: ingredient
+      };
+      this.appState.dispatch(new UpdateIngredientAction(updateIngredientActionData))
     }
     else {
       this.appState.dispatch(new AddIngredientAction(ingredient));

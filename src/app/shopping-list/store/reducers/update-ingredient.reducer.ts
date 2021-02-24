@@ -10,9 +10,7 @@ export function updateIngredientReducer(state: ShoppingListState, action: Update
     (ingredient: Ingredient): Ingredient => ingredient.clone()
   );
 
-  const ingredient:Ingredient = state.ingredients[(<UpdateIngredientAction> action).payload.index].clone();
-
-  ingredients[action.payload.index] = ingredient;
+  ingredients[action.payload.index] = action.payload.ingredient;
 
   return {
     ...state,
