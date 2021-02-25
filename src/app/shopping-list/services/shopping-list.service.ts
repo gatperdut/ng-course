@@ -11,8 +11,6 @@ export class ShoppingListService implements OnInit {
     new Ingredient('Tomatoes', 10)
   ];
 
-  private ingredientsChangedSubject: Subject<Ingredient[]> = new Subject<Ingredient[]>();
-
   private ingredientSelectedSubject: Subject<number> = new Subject<number>();
 
   constructor() {
@@ -21,10 +19,6 @@ export class ShoppingListService implements OnInit {
 
   ngOnInit(): void {
 
-  }
-
-  public get ingredientsChanged(): Subject<Ingredient[]> {
-    return this.ingredientsChangedSubject;
   }
 
   public get ingredientSelected(): Subject<number> {
@@ -37,19 +31,6 @@ export class ShoppingListService implements OnInit {
 
   public getIngredient(index: number): Ingredient {
     return this.getIngredients()[index];
-  }
-
-  public updateIngredient(index: number, ingredient: Ingredient): void {
-    this.ingredients[index] = ingredient;
-
-    this.ingredientsChanged.next(this.getIngredients());
-  }
-
-  public deleteIngredient(index: number): void {
-    this.ingredients.splice(index, 1);
-
-    this.ingredientsChanged.next(this.getIngredients());
-    this.ingredientSelected.next(-1);
   }
 
 }
