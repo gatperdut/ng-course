@@ -4,14 +4,25 @@ import { AddIngredientsAction } from "./add-ingredients.action";
 import { DeleteIngredientAction } from "./delete-ingredient.action";
 import { UpdateIngredientAction } from "./update-ingredient.action";
 
-const _ShoppingListAction = [
+const _shoppingListActions = [
+  AddIngredientAction,
+  AddIngredientsAction,
+  UpdateIngredientAction,
+  DeleteIngredientAction
+];
+
+const _shoppingListActionPrototypes = [
   AddIngredientAction.prototype,
   AddIngredientsAction.prototype,
   UpdateIngredientAction.prototype,
   DeleteIngredientAction.prototype
 ] as const;
 
-export type ShoppingListAction = typeof _ShoppingListAction[number];
+export function isShoppingListAction(action: AnyShoppingListAction): action is ShoppingListAction {
+  return _shoppingListActions.some(clazz => action instanceof clazz);
+}
+
+export type ShoppingListAction = typeof _shoppingListActionPrototypes[number];
 
 export type AnyShoppingListAction =
   ShoppingListAction       |

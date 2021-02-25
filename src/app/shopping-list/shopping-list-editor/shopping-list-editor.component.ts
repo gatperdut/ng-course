@@ -35,12 +35,12 @@ export class ShoppingListEditorComponent implements OnInit, OnDestroy {
       (shoppingListState: ShoppingListState) => {
         this.editingIndex = shoppingListState.editor.index;
         if (this.editingIndex >= 0) {
-            this.ngForm.setValue(
-              {
-                name:   shoppingListState.editor.ingredient.name,
-                amount: shoppingListState.editor.ingredient.amount
-              }
-            );
+          this.ngForm.setValue(
+            {
+              name:   shoppingListState.editor.ingredient.name,
+              amount: shoppingListState.editor.ingredient.amount
+            }
+          );
         }
         else {
           this.onClear();
@@ -55,7 +55,6 @@ export class ShoppingListEditorComponent implements OnInit, OnDestroy {
 
     if (this.editingIndex >= 0) {
       const updateIngredientActionPayload: UpdateIngredientActionPayload = {
-        index: this.editingIndex,
         ingredient: ingredient
       };
 
@@ -69,9 +68,6 @@ export class ShoppingListEditorComponent implements OnInit, OnDestroy {
       this.appState.dispatch(new AddIngredientAction(addIngredientActionPayload));
     }
 
-    const cancelIngredientEditionActionPayload: CancelIngredientEditionActionPayload = {};
-    this.appState.dispatch(new CancelIngredientEditionAction(cancelIngredientEditionActionPayload))
-
     this.onClear();
   }
 
@@ -82,9 +78,7 @@ export class ShoppingListEditorComponent implements OnInit, OnDestroy {
   }
 
   public onCancel(): void {
-    const cancelIngredientEditionActionPayload: CancelIngredientEditionActionPayload = {
-
-    };
+    const cancelIngredientEditionActionPayload: CancelIngredientEditionActionPayload = {};
 
     this.appState.dispatch(new CancelIngredientEditionAction(cancelIngredientEditionActionPayload));
   }

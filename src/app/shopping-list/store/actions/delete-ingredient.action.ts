@@ -3,9 +3,7 @@ import { Action } from '@ngrx/store';
 export const DELETE_INGREDIENT: string = 'DELETE_INGREDIENT';
 
 export type DeleteIngredientActionPayload = {
-
   index: number;
-
 }
 
 export class DeleteIngredientAction implements Action {
@@ -14,7 +12,7 @@ export class DeleteIngredientAction implements Action {
 
   constructor(
       public payload: DeleteIngredientActionPayload
-    ) {
+  ) {
 
   }
 

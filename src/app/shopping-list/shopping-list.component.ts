@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Ingredient } from '../shared/models/ingredient.model';
 import { AppState } from '../store/app.state';
 import { ShoppingListService } from './services/shopping-list.service';
+import { CancelIngredientEditionAction, CancelIngredientEditionActionPayload } from './shopping-list-editor/store/actions/cancel-ingredient-edition.action';
 import { StartIngredientEditionAction, StartIngredientEditionActionPayload } from './shopping-list-editor/store/actions/start-ingredient-edition.action';
 import { DeleteIngredientAction, DeleteIngredientActionPayload } from './store/actions/delete-ingredient.action';
 import { ShoppingListState } from './store/shopping-list.state';
@@ -17,7 +18,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   public shoppingListState: Observable<ShoppingListState>;
 
-  private ingredientSelectedSubscription!: Subscription;
+  private ingredientSelected!: Subscription;
 
   public editingIndex: number = -1;
 
@@ -31,9 +32,9 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.shoppingListState = this.appState.select('shoppingListState')
 
-    this.ingredientSelectedSubscription = this.shoppingListService.ingredientSelected.subscribe(
-      (index: number) => {
-        this.editingIndex = index;
+    this.ingredientSelected = this.appState.select('shoppingListState').subscribe(
+      (shoppingListState: ShoppingListState) => {
+        this.editingIndex = shoppingListState.editor.index;
       }
     );
   }
@@ -55,7 +56,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.ingredientSelectedSubscription.unsubscribe();
+    this.ingredientSelected.unsubscribe();
   }
 
 }

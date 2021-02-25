@@ -11,18 +11,12 @@ export class ShoppingListService implements OnInit {
     new Ingredient('Tomatoes', 10)
   ];
 
-  private ingredientSelectedSubject: Subject<number> = new Subject<number>();
-
   constructor() {
 
   }
 
   ngOnInit(): void {
 
-  }
-
-  public get ingredientSelected(): Subject<number> {
-    return this.ingredientSelectedSubject;
   }
 
   public getIngredients(): Ingredient[] {

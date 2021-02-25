@@ -10,11 +10,16 @@ export function updateIngredientReducer(state: ShoppingListState, action: Update
     (ingredient: Ingredient): Ingredient => ingredient.clone()
   );
 
-  ingredients[action.payload.index] = action.payload.ingredient;
+  ingredients[state.editor.index] = action.payload.ingredient;
 
   return {
     ...state,
-    ingredients: ingredients
+    ingredients: ingredients,
+    editor: {
+      ...state.editor,
+      index: -1,
+      ingredient: null
+    }
   } as ShoppingListState;
 
 }

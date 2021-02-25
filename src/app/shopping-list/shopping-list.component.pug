@@ -1,6 +1,6 @@
 shopping-list-editor
 hr
 .list-group
-  .list-group-item("*ngFor"="let ingredient of (shoppingListState | async).ingredients; let i = index;", "(click)"="onIngredientSelected(i)", [class]="{ selected: editingIndex === i }")
-    button.btn.btn-danger.btn-sm("(click)"="onIngredientDeleted(i)", [disabled]="editingIndex >= 0 && editingIndex !== i") X
+  .list-group-item("*ngFor"="let ingredient of (shoppingListState | async).ingredients; let i = index;", "(click)"="onIngredientSelected(i)", [class.selected]="editingIndex == i")
+    button.btn.btn-danger.btn-sm("(click)"="onIngredientDeleted(i)") X
     | &nbsp; {{ ingredient.name }} ({{ ingredient.amount }})

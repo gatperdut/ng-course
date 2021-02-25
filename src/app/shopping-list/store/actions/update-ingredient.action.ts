@@ -5,8 +5,6 @@ export const UPDATE_INGREDIENT: string = 'UPDATE_INGREDIENT';
 
 export type UpdateIngredientActionPayload = {
 
-  index: number;
-
   ingredient: Ingredient;
 
 };

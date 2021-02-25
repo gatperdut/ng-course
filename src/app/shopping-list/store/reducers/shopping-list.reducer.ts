@@ -1,12 +1,12 @@
 import { Ingredient } from "src/app/shared/models/ingredient.model";
 import * as _ from "underscore";
-import { ShoppingListEditorAction } from "../../shopping-list-editor/store/actions/shopping-list-editor.actions";
+import { isShoppingListEditorAction, ShoppingListEditorAction } from "../../shopping-list-editor/store/actions/shopping-list-editor.actions";
 import { StartIngredientEditionAction } from "../../shopping-list-editor/store/actions/start-ingredient-edition.action";
 import { initialShoppingListEditorState, shoppingListEditorReducer } from "../../shopping-list-editor/store/reducers/shopping-list-editor.reducer";
 import { AddIngredientAction, ADD_INGREDIENT } from "../actions/add-ingredient.action";
 import { AddIngredientsAction, ADD_INGREDIENTS } from "../actions/add-ingredients.action";
 import { DeleteIngredientAction, DELETE_INGREDIENT } from "../actions/delete-ingredient.action";
-import { AnyShoppingListAction, ShoppingListAction } from "../actions/shopping-list.actions";
+import { AnyShoppingListAction, isShoppingListAction, ShoppingListAction } from "../actions/shopping-list.actions";
 import { UpdateIngredientAction, UPDATE_INGREDIENT } from "../actions/update-ingredient.action";
 import { ShoppingListState } from "../shopping-list.state";
 import { addIngredientReducer } from "./add-ingredient.reducer";
@@ -21,22 +21,6 @@ const initialShoppingListState: ShoppingListState = {
   ] as Ingredient[],
   editor: initialShoppingListEditorState
 };
-
-function isShoppingListAction(action: AnyShoppingListAction): action is ShoppingListAction {
-  return [
-    AddIngredientAction,
-    AddIngredientsAction,
-    UpdateIngredientAction,
-    DeleteIngredientAction
-  ].some(clazz => action instanceof clazz);
-}
-
-function isShoppingListEditorAction(action: AnyShoppingListAction): action is ShoppingListEditorAction {
-  return [
-    StartIngredientEditionAction,
-    StartIngredientEditionAction
-  ].some(clazz => action instanceof clazz);
-}
 
 export function shoppingListMasterReducer(state = initialShoppingListState, action: AnyShoppingListAction): ShoppingListState {
   if (isShoppingListAction(action)) {
