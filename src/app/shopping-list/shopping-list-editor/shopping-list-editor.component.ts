@@ -5,8 +5,10 @@ import { Subscription } from 'rxjs';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
 import { ShoppingListService } from '../services/shopping-list.service';
 import { AppState } from 'src/app/store/app.state';
-import { AddIngredientAction } from '../store/actions/add-ingredient.action';
-import { UpdateIngredientAction, UpdateIngredientActionData } from '../store/actions/update-ingredient.action';
+import { AddIngredientAction, AddIngredientActionPayload } from '../store/actions/add-ingredient.action';
+import { UpdateIngredientAction, UpdateIngredientActionPayload } from '../store/actions/update-ingredient.action';
+import { CancelIngredientEditionAction, CancelIngredientEditionActionPayload } from './store/actions/cancel-ingredient-edition.action';
+import { ShoppingListState } from '../store/shopping-list.state';
 
 @Component({
   selector: 'shopping-list-editor',
@@ -29,15 +31,14 @@ export class ShoppingListEditorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.ingredientSelected = this.shoppingListService.ingredientSelected.subscribe(
-      (index: number) => {
-        this.editingIndex = index;
+    this.ingredientSelected = this.appState.select('shoppingListState').subscribe(
+      (shoppingListState: ShoppingListState) => {
+        this.editingIndex = shoppingListState.editor.index;
         if (this.editingIndex >= 0) {
-            let ingredient: Ingredient = this.shoppingListService.getIngredient(this.editingIndex);
             this.ngForm.setValue(
               {
-                name:   ingredient.name,
-                amount: ingredient.amount
+                name:   shoppingListState.editor.ingredient.name,
+                amount: shoppingListState.editor.ingredient.amount
               }
             );
         }
@@ -53,29 +54,43 @@ export class ShoppingListEditorComponent implements OnInit, OnDestroy {
     const ingredient: Ingredient = new Ingredient(value.name, value.amount);
 
     if (this.editingIndex >= 0) {
-      let updateIngredientActionData: UpdateIngredientActionData = {
+      const updateIngredientActionPayload: UpdateIngredientActionPayload = {
         index: this.editingIndex,
         ingredient: ingredient
       };
-      this.appState.dispatch(new UpdateIngredientAction(updateIngredientActionData))
+
+      this.appState.dispatch(new UpdateIngredientAction(updateIngredientActionPayload))
     }
     else {
-      this.appState.dispatch(new AddIngredientAction(ingredient));
+      const addIngredientActionPayload: AddIngredientActionPayload = {
+        ingredient: ingredient
+      };
+
+      this.appState.dispatch(new AddIngredientAction(addIngredientActionPayload));
     }
 
-    this.shoppingListService.ingredientSelected.next(-1);
+    const cancelIngredientEditionActionPayload: CancelIngredientEditionActionPayload = {};
+    this.appState.dispatch(new CancelIngredientEditionAction(cancelIngredientEditionActionPayload))
+
     this.onClear();
   }
 
   public onClear(): void {
-    this.ngForm.reset();
+    if (this.ngForm) {
+      this.ngForm.reset();
+    }
   }
 
   public onCancel(): void {
-    this.shoppingListService.ingredientSelected.next(-1);
+    const cancelIngredientEditionActionPayload: CancelIngredientEditionActionPayload = {
+
+    };
+
+    this.appState.dispatch(new CancelIngredientEditionAction(cancelIngredientEditionActionPayload));
   }
 
   ngOnDestroy(): void {
+    this.onCancel();
     this.ingredientSelected.unsubscribe();
   }
 

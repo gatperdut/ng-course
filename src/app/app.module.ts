@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthenticationInterceptorService } from './authentication/services/authentication-interceptor.service';
 import { SharedModule } from './shared/shared.module';
-import { shoppingListReducer } from './shopping-list/store/reducers/shopping-list.reducer';
+import { shoppingListMasterReducer } from './shopping-list/store/reducers/shopping-list.reducer';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { shoppingListReducer } from './shopping-list/store/reducers/shopping-lis
     HttpClientModule,
     StoreModule.forRoot(
       {
-        shoppingListState: shoppingListReducer
+        shoppingListState: shoppingListMasterReducer
       }
     ),
     AppRoutingModule,

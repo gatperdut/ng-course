@@ -12,5 +12,5 @@ export function deleteIngredientReducer(state: ShoppingListState, action: Delete
   return {
     ...state,
     ingredients: ingredients
-  };
+  } as ShoppingListState;
 }

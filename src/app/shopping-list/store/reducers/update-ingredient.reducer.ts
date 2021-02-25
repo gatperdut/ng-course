@@ -15,6 +15,6 @@ export function updateIngredientReducer(state: ShoppingListState, action: Update
   return {
     ...state,
     ingredients: ingredients
-  };
+  } as ShoppingListState;
 
 }

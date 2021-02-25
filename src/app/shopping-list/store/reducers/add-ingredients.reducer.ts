@@ -27,10 +27,10 @@ function mergeIngredients(stateIngredients: Ingredient[], ingredients: Ingredien
 }
 
 export function addIngredientsReducer(state: ShoppingListState, action: AddIngredientsAction): ShoppingListState {
-  let ingredients: Ingredient[] = mergeIngredients(state.ingredients, (<AddIngredientsAction>action).payload);
+  let ingredients: Ingredient[] = mergeIngredients(state.ingredients, (<AddIngredientsAction>action).payload.ingredients);
 
   return {
     ...state,
     ingredients: ingredients
-  };
+  } as ShoppingListState;
 }

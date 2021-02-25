@@ -4,6 +4,6 @@ import { ShoppingListState } from "../shopping-list.state";
 export function addIngredientReducer(state: ShoppingListState, action: AddIngredientAction): ShoppingListState {
   return {
     ...state,
-    ingredients: [...state.ingredients, action.payload]
-  };
+    ingredients: [...state.ingredients, action.payload.ingredient]
+  } as ShoppingListState;
 }
