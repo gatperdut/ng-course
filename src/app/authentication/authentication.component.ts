@@ -1,18 +1,21 @@
-import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, ViewChild, ViewContainerRef } from "@angular/core";
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { Router } from "@angular/router";
 import { Observable, Subscription } from "rxjs";
 import { AlertComponent } from "../shared/alert/alert.component";
 import { PlaceholderDirective } from "../shared/placeholder/placeholder.directive";
 import { AuthenticationService } from "./services/authentication.service";
 import { AuthenticationResponseData } from "./models/authentication-response-data.interface";
+import { AppState } from "../store/app.state";
+import { Store } from "@ngrx/store";
+import { SigninPreAction, SigninPreActionPayload } from "./store/actions/signin-pre.action";
+import { AuthenticationState } from "./store/authentication.state";
 
 @Component({
   selector: 'authentication',
   templateUrl: './authentication.component.html',
   styleUrls: ['./authentication.component.scss']
 })
-export class AuthenticationComponent implements OnDestroy {
+export class AuthenticationComponent implements OnInit, OnDestroy {
 
   public signinMode: boolean = true;
 
@@ -26,10 +29,22 @@ export class AuthenticationComponent implements OnDestroy {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private appState: Store<AppState>
   ) {
 
+  }
+
+  public ngOnInit(): void {
+    this.appState.select('authenticationState').subscribe(
+      (authenticationState: AuthenticationState): void => {
+        this.loading = authenticationState.loading;
+        this.error = authenticationState.error;
+        if (this.error) {
+          this.handleError(this.error);
+        }
+      }
+    );
   }
 
   public ngOnDestroy(): void {
@@ -42,37 +57,22 @@ export class AuthenticationComponent implements OnDestroy {
     this.signinMode = !this.signinMode;
   }
 
-  // public onCloseAlert(): void {
-  //   this.error = null;
-  // }
-
   onSubmit(ngForm: NgForm): void {
     const email: string = ngForm.value.email;
     const password: string = ngForm.value.password;
 
-    this.loading = true;
-
     let observable: Observable<AuthenticationResponseData>;
 
     if (this.signinMode) {
-      observable = this.authenticationService.signin(email, password);
+      const signinPreActionPayload: SigninPreActionPayload = {
+        email: email,
+        password: password
+      };
+      this.appState.dispatch(new SigninPreAction(signinPreActionPayload));
     }
     else {
       observable = this.authenticationService.signup(email, password);
     }
-
-    observable
-    .subscribe(
-      (authenticationResponseData: AuthenticationResponseData): void => {
-        this.router.navigate(['/recipes']);
-        this.loading = false;
-      },
-      (errorMessage: string) => {
-        // this.error = errorMessage;
-        this.handleError(errorMessage);
-        this.loading = false;
-      }
-    );
 
     ngForm.reset();
   }

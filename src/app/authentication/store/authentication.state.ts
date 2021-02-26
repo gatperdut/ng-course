@@ -4,4 +4,8 @@ export type AuthenticationState = {
 
   user: User;
 
+  error: string;
+
+  loading: boolean;
+
 };

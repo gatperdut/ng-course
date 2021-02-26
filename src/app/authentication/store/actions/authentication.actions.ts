@@ -1,13 +1,22 @@
-import { SigninAction } from "./signin.action";
+import { AuthenticateFailAction } from "./authenticate-fail.action";
+import { SigninPreAction } from "./signin-pre.action";
+import { AuthenticateAction } from "./authenticate.action";
 import { SignoutAction } from "./signout.action";
+import { SignupPreAction } from "./signup-pre.action";
 
 const _authenticationActions = [
-  SigninAction,
+  SignupPreAction,
+  SigninPreAction,
+  AuthenticateAction,
+  AuthenticateFailAction,
   SignoutAction
 ];
 
 const _authenticationActionPrototypes = [
-  SigninAction.prototype,
+  SignupPreAction.prototype,
+  SigninPreAction.prototype,
+  AuthenticateAction.prototype,
+  AuthenticateFailAction.prototype,
   SignoutAction.prototype
 ] as const;
 

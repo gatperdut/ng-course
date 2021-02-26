@@ -1,8 +1,8 @@
 import { User } from "../../models/user.model";
-import { SigninAction } from "../actions/signin.action";
+import { AuthenticateAction } from "../actions/authenticate.action";
 import { AuthenticationState } from "../authentication.state";
 
-export function signinReducer(state: AuthenticationState, action: SigninAction): AuthenticationState {
+export function authenticateReducer(state: AuthenticationState, action: AuthenticateAction): AuthenticationState {
   const user: User = new User(
     action.payload.id,
     action.payload.email,
@@ -12,6 +12,8 @@ export function signinReducer(state: AuthenticationState, action: SigninAction):
 
   return {
     ...state,
-    user: user
+    user: user,
+    error: null,
+    loading: false
   } as AuthenticationState;
 }

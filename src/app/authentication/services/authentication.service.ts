@@ -2,27 +2,20 @@ import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http"
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { BehaviorSubject, Observable, throwError } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { AppState } from "src/app/store/app.state";
+import { environment } from "src/environments/environment";
 import { AuthenticationResponseData } from "../models/authentication-response-data.interface";
 import { UserData } from "../models/user-data.interface";
 import { User } from "../models/user.model";
-import { SigninAction, SigninActionPayload } from "../store/actions/signin.action";
+import { AuthenticateAction, AuthenticateActionPayload } from "../store/actions/authenticate.action";
 import { SignoutAction, SignoutActionPayload } from "../store/actions/signout.action";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-
-  private readonly signupUrl: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp'
-
-  private readonly signinUrl: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword';
-
-  private apiKey: string = 'AIzaSyA-y97QCDzcSaMqeUDH14MvdBWCwV4tFzQ';
-
-  // public userChangedSubject: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   private autoSignoutTimer: NodeJS.Timeout;
 
@@ -38,6 +31,7 @@ export class AuthenticationService {
     let message: string = 'An error occurred.';
 
     if (httpErrorResponse.error && httpErrorResponse.error.error) {
+
       switch (httpErrorResponse.error.error.message) {
         case 'INVALID_EMAIL':
           message = 'The email address is not valid.';
@@ -74,21 +68,21 @@ export class AuthenticationService {
 
     localStorage.setItem('userData', JSON.stringify(user));
 
-    const signinActionPayload: SigninActionPayload = {
+    const signinActionPayload: AuthenticateActionPayload = {
       id: authenticationResponseData.localId,
       email: authenticationResponseData.email,
       token: authenticationResponseData.idToken,
       tokenExpirationDate: expirationDate
     };
 
-    this.appState.dispatch(new SigninAction(signinActionPayload));
+    this.appState.dispatch(new AuthenticateAction(signinActionPayload));
   }
 
   public signup(email: string, password: string): Observable<AuthenticationResponseData> {
-    let httpParams = new HttpParams().set('key', this.apiKey);
+    let httpParams = new HttpParams().set('key', environment.firebase.apiKey);
 
     return this.httpClient.post<AuthenticationResponseData>(
-      this.signupUrl,
+      environment.firebase.signupUrl,
       {
         email: email,
         password: password,
@@ -126,23 +120,23 @@ export class AuthenticationService {
       if (expiresInMs > 0) {
         this.autoLogout(expiresInMs);
 
-        const signinActionPayload: SigninActionPayload = {
+        const signinActionPayload: AuthenticateActionPayload = {
           id: userData.id,
           email: userData.email,
           token: userData._token,
           tokenExpirationDate: new Date(userData._tokenExpirationDate)
         };
 
-        this.appState.dispatch(new SigninAction(signinActionPayload));
+        this.appState.dispatch(new AuthenticateAction(signinActionPayload));
       }
     }
   }
 
   public signin(email: string, password: string): Observable<AuthenticationResponseData> {
-    let httpParams = new HttpParams().set('key', this.apiKey);
+    let httpParams = new HttpParams().set('key', environment.firebase.apiKey);
 
     return this.httpClient.post<AuthenticationResponseData>(
-      this.signinUrl,
+      environment.firebase.signinUrl,
       {
         email: email,
         password: password,

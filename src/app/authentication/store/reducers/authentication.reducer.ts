@@ -1,19 +1,28 @@
-import { initial } from "underscore";
 import { AnyAuthenticationAction, AuthenticationAction, isAuthenticationAction } from "../actions/authentication.actions";
-import { SIGNIN, SigninAction } from "../actions/signin.action";
+import { AuthenticateFailAction, AUTHENTICATE_FAIL } from "../actions/authenticate-fail.action";
+import { SigninPreAction, SIGNIN_PRE } from "../actions/signin-pre.action";
+import { AUTHENTICATE, AuthenticateAction } from "../actions/authenticate.action";
 import { SIGNOUT, SignoutAction } from "../actions/signout.action";
 import { AuthenticationState } from "../authentication.state";
-import { signinReducer } from "./signin.reducer";
+import { authenticateFailReducer } from "./authenticate-fail.reducer";
+import { signinPreReducer } from "./signin-pre.reducer";
+import { authenticateReducer } from "./authenticate.reducer";
 import { signoutReducer } from "./signout.reducer";
 
 const initialAuthenticationState: AuthenticationState = {
-  user: null
+  user: null,
+  error: null,
+  loading: false
 };
 
 function authenticationReducer(state: AuthenticationState, action: AuthenticationAction): AuthenticationState {
   switch (action.type) {
-    case SIGNIN:
-      return signinReducer(state, <SigninAction>action);
+    case SIGNIN_PRE:
+      return signinPreReducer(state, <SigninPreAction>action);
+    case AUTHENTICATE:
+      return authenticateReducer(state, <AuthenticateAction>action);
+    case AUTHENTICATE_FAIL:
+      return authenticateFailReducer(state, <AuthenticateFailAction>action);
     case SIGNOUT:
       return signoutReducer(state, <SignoutAction>action);
   }
