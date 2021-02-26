@@ -1,11 +1,14 @@
 import { SigninAction } from "./signin.action";
+import { SignoutAction } from "./signout.action";
 
 const _authenticationActions = [
-  SigninAction
+  SigninAction,
+  SignoutAction
 ];
 
 const _authenticationActionPrototypes = [
-  SigninAction.prototype
+  SigninAction.prototype,
+  SignoutAction.prototype
 ] as const;
 
 export type AuthenticationAction = typeof _authenticationActionPrototypes[number];

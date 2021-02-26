@@ -4,6 +4,10 @@ import { Subscription } from "rxjs";
 import { AuthenticationService } from "../authentication/services/authentication.service";
 import { User } from "../authentication/models/user.model";
 import { DataStorageService } from "../shared/services/data-storage.service";
+import { AppState } from "../store/app.state";
+import { Store } from "@ngrx/store";
+import { AuthenticationState } from "../authentication/store/authentication.state";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: 'header',
@@ -20,13 +24,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private router: Router,
     private dataStorageService: DataStorageService,
     private authenticationService: AuthenticationService,
+    private appState: Store<AppState>
   ) {
 
   }
 
   ngOnInit(): void {
-    this.userSubscription = this.authenticationService.userChangedSubject.subscribe(
-      (user: (User)) => {
+    this.userSubscription = this.appState.select('authenticationState')
+    .pipe(
+      map(
+        (authenticationState: AuthenticationState) => authenticationState.user
+      )
+    )
+    .subscribe(
+      (user: User) => {
         this.user = user;
       }
     );

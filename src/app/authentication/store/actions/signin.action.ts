@@ -10,7 +10,7 @@ export type SigninActionPayload = {
 
   token: string;
 
-  _tokenExpirationDate: Date;
+  tokenExpirationDate: Date;
 
 };
 

@@ -4,6 +4,9 @@ import { Observable } from "rxjs";
 import { map, take } from "rxjs/operators";
 import { AuthenticationService } from "./authentication.service";
 import { User } from "../models/user.model";
+import { AppState } from "src/app/store/app.state";
+import { Store } from "@ngrx/store";
+import { AuthenticationState } from "../store/authentication.state";
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +14,18 @@ import { User } from "../models/user.model";
 export class AuthenticationGuardService implements CanActivate {
 
   constructor(
-    private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private appState: Store<AppState>
   ) {
 
   }
 
   public canActivate(activateRouteSnapshot: ActivatedRouteSnapshot, routerStateSnapshot: RouterStateSnapshot): (Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree) {
-    return this.authenticationService.userChangedSubject.pipe(
+    return this.appState.select('authenticationState').pipe(
       take(1),
+      map(
+        (authenticationState: AuthenticationState) => authenticationState.user
+      ),
       map(
         (user: User): (boolean | UrlTree) => {
           const authenticated: boolean = !!user;

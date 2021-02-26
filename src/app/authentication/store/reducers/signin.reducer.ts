@@ -7,7 +7,7 @@ export function signinReducer(state: AuthenticationState, action: SigninAction):
     action.payload.id,
     action.payload.email,
     action.payload.token,
-    action.payload._tokenExpirationDate
+    action.payload.tokenExpirationDate
   );
 
   return {

@@ -1,11 +1,15 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
 import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
+import { AppState } from "src/app/store/app.state";
 import { AuthenticationResponseData } from "../models/authentication-response-data.interface";
 import { UserData } from "../models/user-data.interface";
 import { User } from "../models/user.model";
+import { SigninAction, SigninActionPayload } from "../store/actions/signin.action";
+import { SignoutAction, SignoutActionPayload } from "../store/actions/signout.action";
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +22,14 @@ export class AuthenticationService {
 
   private apiKey: string = 'AIzaSyA-y97QCDzcSaMqeUDH14MvdBWCwV4tFzQ';
 
-  public userChangedSubject: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  // public userChangedSubject: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   private autoSignoutTimer: NodeJS.Timeout;
 
   constructor(
     private httpClient: HttpClient,
-    private router: Router
+    private router: Router,
+    private appState: Store<AppState>
   ) {
 
   }
@@ -69,7 +74,14 @@ export class AuthenticationService {
 
     localStorage.setItem('userData', JSON.stringify(user));
 
-    this.userChangedSubject.next(user);
+    const signinActionPayload: SigninActionPayload = {
+      id: authenticationResponseData.localId,
+      email: authenticationResponseData.email,
+      token: authenticationResponseData.idToken,
+      tokenExpirationDate: expirationDate
+    };
+
+    this.appState.dispatch(new SigninAction(signinActionPayload));
   }
 
   public signup(email: string, password: string): Observable<AuthenticationResponseData> {
@@ -114,7 +126,14 @@ export class AuthenticationService {
       if (expiresInMs > 0) {
         this.autoLogout(expiresInMs);
 
-        this.userChangedSubject.next(user);
+        const signinActionPayload: SigninActionPayload = {
+          id: userData.id,
+          email: userData.email,
+          token: userData._token,
+          tokenExpirationDate: new Date(userData._tokenExpirationDate)
+        };
+
+        this.appState.dispatch(new SigninAction(signinActionPayload));
       }
     }
   }
@@ -153,7 +172,9 @@ export class AuthenticationService {
 
     this.autoSignoutTimer = null;
 
-    this.userChangedSubject.next(null);
+    const signoutActionPayload: SignoutActionPayload = {};
+
+    this.appState.dispatch(new SignoutAction(signoutActionPayload));
 
     localStorage.removeItem('userData');
 
