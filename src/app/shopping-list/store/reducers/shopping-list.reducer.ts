@@ -1,7 +1,5 @@
 import { Ingredient } from "src/app/shared/models/ingredient.model";
-import * as _ from "underscore";
 import { isShoppingListEditorAction, ShoppingListEditorAction } from "../../shopping-list-editor/store/actions/shopping-list-editor.actions";
-import { StartIngredientEditionAction } from "../../shopping-list-editor/store/actions/start-ingredient-edition.action";
 import { initialShoppingListEditorState, shoppingListEditorReducer } from "../../shopping-list-editor/store/reducers/shopping-list-editor.reducer";
 import { AddIngredientAction, ADD_INGREDIENT } from "../actions/add-ingredient.action";
 import { AddIngredientsAction, ADD_INGREDIENTS } from "../actions/add-ingredients.action";
@@ -22,18 +20,6 @@ const initialShoppingListState: ShoppingListState = {
   editor: initialShoppingListEditorState
 };
 
-export function shoppingListMasterReducer(state = initialShoppingListState, action: AnyShoppingListAction): ShoppingListState {
-  if (isShoppingListAction(action)) {
-    return shoppingListReducer(state, <ShoppingListAction>action);
-  }
-
-  if (isShoppingListEditorAction(action)) {
-    return shoppingListEditorReducer(state, <ShoppingListEditorAction> action);
-  }
-
-  return state; // might happen during initialization, triggered by ngrx.
-}
-
 function shoppingListReducer(state: ShoppingListState, action: ShoppingListAction): ShoppingListState {
   switch (action.type) {
     case ADD_INGREDIENT:
@@ -47,4 +33,16 @@ function shoppingListReducer(state: ShoppingListState, action: ShoppingListActio
   }
 
   throw new Error('Unhandled ShoppingListAction');
+}
+
+export function shoppingListMasterReducer(state = initialShoppingListState, action: AnyShoppingListAction): ShoppingListState {
+  if (isShoppingListAction(action)) {
+    return shoppingListReducer(state, <ShoppingListAction>action);
+  }
+
+  if (isShoppingListEditorAction(action)) {
+    return shoppingListEditorReducer(state, <ShoppingListEditorAction> action);
+  }
+
+  return state; // might happen during initialization, triggered by ngrx.
 }

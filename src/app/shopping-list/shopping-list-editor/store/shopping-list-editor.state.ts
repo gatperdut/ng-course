@@ -6,4 +6,4 @@ export type ShoppingListEditorState = {
 
   ingredient: Ingredient;
 
-}
+};

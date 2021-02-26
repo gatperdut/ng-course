@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
-import { ShoppingListService } from '../services/shopping-list.service';
 import { AppState } from 'src/app/store/app.state';
 import { AddIngredientAction, AddIngredientActionPayload } from '../store/actions/add-ingredient.action';
 import { UpdateIngredientAction, UpdateIngredientActionPayload } from '../store/actions/update-ingredient.action';
@@ -24,7 +23,6 @@ export class ShoppingListEditorComponent implements OnInit, OnDestroy {
   editingIndex: number = -1;
 
   constructor(
-    private shoppingListService: ShoppingListService,
     private appState: Store<AppState>
   ) {
 

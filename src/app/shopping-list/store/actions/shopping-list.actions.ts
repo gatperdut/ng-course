@@ -18,13 +18,15 @@ const _shoppingListActionPrototypes = [
   DeleteIngredientAction.prototype
 ] as const;
 
-export function isShoppingListAction(action: AnyShoppingListAction): action is ShoppingListAction {
-  return _shoppingListActions.some(clazz => action instanceof clazz);
-}
-
 export type ShoppingListAction = typeof _shoppingListActionPrototypes[number];
 
 export type AnyShoppingListAction =
   ShoppingListAction       |
   ShoppingListEditorAction
 ;
+
+export function isShoppingListAction(action: AnyShoppingListAction): action is ShoppingListAction {
+  return _shoppingListActions.some(clazz => action instanceof clazz);
+}
+
+
