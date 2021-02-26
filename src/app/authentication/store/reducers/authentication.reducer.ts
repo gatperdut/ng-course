@@ -1,17 +1,21 @@
 import { initial } from "underscore";
 import { AnyAuthenticationAction, AuthenticationAction, isAuthenticationAction } from "../actions/authentication.actions";
-import { LOGIN, LoginAction } from "../actions/login.action";
+import { SIGNIN, SigninAction } from "../actions/signin.action";
+import { SIGNOUT, SignoutAction } from "../actions/signout.action";
 import { AuthenticationState } from "../authentication.state";
-import { loginReducer } from "./login.reducer";
+import { signinReducer } from "./signin.reducer";
+import { signoutReducer } from "./signout.reducer";
 
 const initialAuthenticationState: AuthenticationState = {
   user: null
 };
 
-function authenticationReducer(state: AuthenticationState, action: AnyAuthenticationAction): AuthenticationState {
+function authenticationReducer(state: AuthenticationState, action: AuthenticationAction): AuthenticationState {
   switch (action.type) {
-    case LOGIN:
-      return loginReducer(state, <LoginAction>action);
+    case SIGNIN:
+      return signinReducer(state, <SigninAction>action);
+    case SIGNOUT:
+      return signoutReducer(state, <SignoutAction>action);
   }
 
   throw new Error('Unhandled AuthenticationAction');
