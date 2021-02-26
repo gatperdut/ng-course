@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-export const CANCEL_INGREDIENT_EDITION: string = 'CANCEL_INGREDIENT_EDITION';
+export const CANCEL_INGREDIENT_EDITION: string = '[ShoppingListEditor] CANCEL_INGREDIENT_EDITION';
 
 export type CancelIngredientEditionActionPayload = {
 

@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-export const SIGNOUT: string = 'SIGNOUT';
+export const SIGNOUT: string = '[Authentication] SIGNOUT';
 
 export type SignoutActionPayload = {
 

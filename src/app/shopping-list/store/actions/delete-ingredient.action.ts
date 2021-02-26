@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-export const DELETE_INGREDIENT: string = 'DELETE_INGREDIENT';
+export const DELETE_INGREDIENT: string = '[ShoppingList] DELETE_INGREDIENT';
 
 export type DeleteIngredientActionPayload = {
   index: number;

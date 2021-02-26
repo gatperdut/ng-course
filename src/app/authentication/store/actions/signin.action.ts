@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-export const SIGNIN: string = 'SIGNIN';
+export const SIGNIN: string = '[Authentication] SIGNIN';
 
 export type SigninActionPayload = {
 

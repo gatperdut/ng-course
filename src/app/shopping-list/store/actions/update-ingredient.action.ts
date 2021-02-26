@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
 
-export const UPDATE_INGREDIENT: string = 'UPDATE_INGREDIENT';
+export const UPDATE_INGREDIENT: string = '[ShoppingList] UPDATE_INGREDIENT';
 
 export type UpdateIngredientActionPayload = {
 
