@@ -1,14 +1,13 @@
 import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { Observable, Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 import { AlertComponent } from "../shared/alert/alert.component";
 import { PlaceholderDirective } from "../shared/placeholder/placeholder.directive";
-import { AuthenticationService } from "./services/authentication.service";
-import { AuthenticationResponseData } from "./models/authentication-response-data.interface";
 import { AppState } from "../store/app.state";
 import { Store } from "@ngrx/store";
 import { SigninPreAction, SigninPreActionPayload } from "./store/actions/signin-pre.action";
 import { AuthenticationState } from "./store/authentication.state";
+import { SignupPreAction, SignupPreActionPayload } from "./store/actions/signup-pre.action";
 
 @Component({
   selector: 'authentication',
@@ -28,7 +27,6 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   private onAlertCloseSubscription: Subscription;
 
   constructor(
-    private authenticationService: AuthenticationService,
     private componentFactoryResolver: ComponentFactoryResolver,
     private appState: Store<AppState>
   ) {
@@ -61,8 +59,6 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
     const email: string = ngForm.value.email;
     const password: string = ngForm.value.password;
 
-    let observable: Observable<AuthenticationResponseData>;
-
     if (this.signinMode) {
       const signinPreActionPayload: SigninPreActionPayload = {
         email: email,
@@ -71,7 +67,11 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
       this.appState.dispatch(new SigninPreAction(signinPreActionPayload));
     }
     else {
-      observable = this.authenticationService.signup(email, password);
+      const signupPreActionPayload: SignupPreActionPayload = {
+        email: email,
+        password: password
+      };
+      this.appState.dispatch(new SignupPreAction(signupPreActionPayload));
     }
 
     ngForm.reset();

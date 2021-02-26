@@ -8,6 +8,8 @@ import { authenticateFailReducer } from "./authenticate-fail.reducer";
 import { signinPreReducer } from "./signin-pre.reducer";
 import { authenticateReducer } from "./authenticate.reducer";
 import { signoutReducer } from "./signout.reducer";
+import { SignupPreAction, SIGNUP_PRE } from "../actions/signup-pre.action";
+import { signupPreReducer } from "./signup-pre.reducer";
 
 const initialAuthenticationState: AuthenticationState = {
   user: null,
@@ -17,6 +19,8 @@ const initialAuthenticationState: AuthenticationState = {
 
 function authenticationReducer(state: AuthenticationState, action: AuthenticationAction): AuthenticationState {
   switch (action.type) {
+    case SIGNUP_PRE:
+      return signupPreReducer(state, <SignupPreAction>action);
     case SIGNIN_PRE:
       return signinPreReducer(state, <SigninPreAction>action);
     case AUTHENTICATE:

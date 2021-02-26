@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 import { AuthenticateFailAction } from '../actions/authenticate-fail.action';
 import { AuthenticateAction } from '../actions/authenticate.action';
 import { Observable } from 'rxjs';
-import { SignupPreAction } from '../actions/signup-pre.action';
 import { signupPreEffect } from './signup-pre.effect';
 
 @Injectable()
@@ -25,12 +24,12 @@ export class AuthenticationEffects {
   @Effect()
   signinPre: Observable<AuthenticateAction | AuthenticateFailAction> = signinPreEffect(this.actions$, this.httpClient);
 
+  @Effect()
+  signupPre: Observable<AuthenticateAction | AuthenticateFailAction> = signupPreEffect(this.actions$, this.httpClient);
+
   @Effect({
     dispatch: false
   })
   authenticate: Observable<AuthenticateAction> = authenticateEffect(this.actions$, this.router);
-
-  @Effect()
-  signupPre: Observable<SignupPreAction> = signupPreEffect(this.actions$);
 
 }
