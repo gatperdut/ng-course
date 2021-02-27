@@ -13,7 +13,6 @@ export function authenticateReducer(state: AuthenticationState, action: Authenti
   return {
     ...state,
     user: user,
-    error: null,
     loading: false
   } as AuthenticationState;
 }

@@ -3,7 +3,7 @@ import { Effect } from '@ngrx/effects';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { signinPreEffect } from './signin-pre.effect';
-import { authenticateEffect } from './authenticate-effect';
+import { redirect } from './redirect.effect';
 import { Router } from '@angular/router';
 import { AuthenticateFailAction } from '../actions/authenticate-fail.action';
 import { AuthenticateAction } from '../actions/authenticate.action';
@@ -30,6 +30,6 @@ export class AuthenticationEffects {
   @Effect({
     dispatch: false
   })
-  authenticate: Observable<AuthenticateAction> = authenticateEffect(this.actions$, this.router);
+  authenticate: Observable<AuthenticateAction> = redirect(this.actions$, this.router);
 
 }

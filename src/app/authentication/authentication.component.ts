@@ -8,6 +8,7 @@ import { Store } from "@ngrx/store";
 import { SigninPreAction, SigninPreActionPayload } from "./store/actions/signin-pre.action";
 import { AuthenticationState } from "./store/authentication.state";
 import { SignupPreAction, SignupPreActionPayload } from "./store/actions/signup-pre.action";
+import { ClearErrorAction, ClearErrorActionPayload } from "./store/actions/clear-error.action";
 
 @Component({
   selector: 'authentication',
@@ -15,6 +16,8 @@ import { SignupPreAction, SignupPreActionPayload } from "./store/actions/signup-
   styleUrls: ['./authentication.component.scss']
 })
 export class AuthenticationComponent implements OnInit, OnDestroy {
+
+  private stateSubscription: Subscription;
 
   public signinMode: boolean = true;
 
@@ -34,7 +37,7 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.appState.select('authenticationState').subscribe(
+    this.stateSubscription = this.appState.select('authenticationState').subscribe(
       (authenticationState: AuthenticationState): void => {
         this.loading = authenticationState.loading;
         this.error = authenticationState.error;
@@ -46,6 +49,8 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    this.stateSubscription.unsubscribe();
+
     if (this.onAlertCloseSubscription && !this.onAlertCloseSubscription.closed) {
       this.onAlertCloseSubscription.unsubscribe();
     }
@@ -91,6 +96,10 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
     this.onAlertCloseSubscription = cAlertComponent.instance.onCloseEventEmitter.subscribe(
       (): void => {
         cAlertComponentHostViewContainerRef.clear();
+
+        const clearErrorActionPayload: ClearErrorActionPayload = {};
+
+        this.appState.dispatch(new ClearErrorAction(clearErrorActionPayload));
 
         this.onAlertCloseSubscription.unsubscribe();
       }

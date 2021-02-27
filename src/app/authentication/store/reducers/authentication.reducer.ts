@@ -10,6 +10,8 @@ import { authenticateReducer } from "./authenticate.reducer";
 import { signoutReducer } from "./signout.reducer";
 import { SignupPreAction, SIGNUP_PRE } from "../actions/signup-pre.action";
 import { signupPreReducer } from "./signup-pre.reducer";
+import { ClearErrorAction, CLEAR_ERROR } from "../actions/clear-error.action";
+import { clearErrorReducer } from "./clear-error.reducer";
 
 const initialAuthenticationState: AuthenticationState = {
   user: null,
@@ -29,6 +31,8 @@ function authenticationReducer(state: AuthenticationState, action: Authenticatio
       return authenticateFailReducer(state, <AuthenticateFailAction>action);
     case SIGNOUT:
       return signoutReducer(state, <SignoutAction>action);
+    case CLEAR_ERROR:
+      return clearErrorReducer(state, <ClearErrorAction>action);
   }
 
   throw new Error('Unhandled AuthenticationAction');

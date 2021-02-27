@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AUTHENTICATE, AuthenticateAction } from '../actions/authenticate.action';
 
-export function authenticateEffect(actions$: Actions, router: Router): Observable<AuthenticateAction> {
+export function redirect(actions$: Actions, router: Router): Observable<AuthenticateAction> {
   return actions$.pipe(
     ofType(
       AUTHENTICATE
